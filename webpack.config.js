@@ -59,7 +59,7 @@ if (TARGET === 'start') {
             loaders: [{
                 test: /\.css$/,
                 loader: 'style!css!postcss'
-            }, ]
+            }]
         },
         plugins: [
             new HtmlWebpackPlugin({
@@ -79,8 +79,8 @@ if (TARGET === 'start') {
 if (TARGET === 'build') {
     module.exports = merge(common, {
         entry: {
-            [config]: './lib/index.js',
-            [config + '.min']: './lib/index.js'
+            [config.name]: './lib/index.js',
+            [config.name + '.min']: './lib/index.js'
         },
         output: {
           filename: '[name].js',

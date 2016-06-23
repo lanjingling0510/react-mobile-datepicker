@@ -1,7 +1,6 @@
 import './main.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../../lib/index.css';
 import DatePicker from '../../lib/index';
 import { nextTime } from '../../lib/time.js';
 (function main() {
