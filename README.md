@@ -7,7 +7,8 @@
 安装
 ------------
 Using [npm](https://www.npmjs.com/):
-$ npm install react-mobile-datepicker --save
+`$ npm install react-mobile-datepicker --save`
+
 然后，使用模块加载工具流，支持common.js或ES2015模块,例如[webpack](https://github.com/webpack/webpack)
 
 ```js
@@ -37,7 +38,8 @@ var minDate = Number(new Date()) - (24*60*60*1000) * 7; // One week before today
 render(
     <DatePicker
         isOpen={true}
-        startDate={new Date()}
+        startDate={today}
+        minDate={minDate}
         onCancel={() => { isOpen = false; }}
         onSelect={(time) => { console.log(time); }} />,
   document.getElementById('root')
