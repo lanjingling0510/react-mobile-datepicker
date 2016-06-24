@@ -38,25 +38,13 @@ import 'react-mobile-datepicker/dist/react-mobile-datepicker.css'; // only needs
 var today = new Date();
 var minDate = Number(new Date()) - (24*60*60*1000) * 7; // One week before today
 
-class Wrap extends Component {
-	state = {
-		isOpen: true,
-	}
-	render() {
-		return (
-			<DatePicker
-				isOpen={this.state.isOpen}
-				startDate={today}
-				minDate={minDate}
-				onCancel={() => { this.state.isOpen = false; }}
-				onSelect={(time) => { console.log(time); }} />
-		);
-	}
-}
 
 
 render(
-  <Wrap />,
+	<DatePicker
+		startDate={today}
+		minDate={minDate}
+		onSelect={(time) => { console.log(time); }} />,
   document.getElementById('root')
 );
 ```
@@ -70,12 +58,10 @@ Prop Types
 | btnColor      | String | #fff | 完成按钮颜色 |
 | dateColor      | String      | #fff  | 日期文字颜色 |
 | layerBackground | String     | #ffa70b | 背景颜色 |
-| isOpen | 	Boolean | true | 是否显示 |
 | startDate | Date | new Date() | 初始日期 |
 | minDate  | Date | 前一周 | 最小日期 |
 | maxDate  | Date | new Date() | 最小日期 |
 | onSelect | Function | () => {} | 点击完成后的回调函数, Date对象作为参数 |
-| onCancel | Function | () => {} | 隐藏时间选择器的回调函数 |
 
 Changelog
 -------------
