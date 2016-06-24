@@ -158,10 +158,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	        value: function _moveToNext(direction) {
 	            var scroll = this.refs.scroll;
 	            var angle = this.angle;
-	            if (direction === 1) {
-	                this._moveTo(scroll, angle + 22.5);
+	            var _props = this.props;
+	            var maxDate = _props.maxDate;
+	            var minDate = _props.minDate;
+
+
+	            var date = direction === 1 ? this.state.dates.find(function (value) {
+	                return value.value.getTime() > (0, _time.nextTime)(maxDate, 0).getTime() && angle + direction * 22.5 + value.angle === 0;
+	            }) : this.state.dates.find(function (value) {
+	                return value.value.getTime() < (0, _time.nextTime)(minDate, 0).getTime() && angle + direction * 22.5 + value.angle === 0;
+	            });
+	            if (date) {
+	                this._moveTo(scroll, angle);
 	            } else {
-	                this._moveTo(scroll, angle - 22.5);
+	                this._moveTo(scroll, angle + direction * 22.5);
 	            }
 	        }
 	    }, {
@@ -182,7 +192,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return value.angle + _this2.state.angle === 0;
 	            });
 	            this.props.onSelect(date.value);
-	            this.props.onCancel();
 	        }
 	    }, {
 	        key: 'handleContentTouch',
@@ -250,12 +259,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var layerBackground = this.props.layerBackground;
+	            var _props2 = this.props;
+	            var layerBackground = _props2.layerBackground;
+	            var btnColor = _props2.btnColor;
 
 	            var scrollStyle = _defineProperty({}, _transition.TRANSFORM, 'rotateX(' + this.state.angle + 'deg)');
 
 	            var datePickerStyle = {
-	                display: this.props.isOpen ? '' : 'none',
 	                backgroundColor: layerBackground
 	            };
 
@@ -270,6 +280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2.default.createElement(
 	                        'span',
 	                        {
+	                            style: { color: btnColor },
 	                            className: 'datepicker-finish-btn',
 	                            onClick: this.handleFinishBtnClick },
 	                        '完成'
@@ -309,21 +320,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    btnColor: _react.PropTypes.string,
 	    dateColor: _react.PropTypes.string,
 	    layerBackground: _react.PropTypes.string,
-	    isOpen: _react.PropTypes.bool,
-	    startDate: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.number]),
-	    minDate: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.number]),
-	    onSelect: _react.PropTypes.func,
-	    onCancel: _react.PropTypes.func
+	    startDate: _react.PropTypes.object,
+	    minDate: _react.PropTypes.object,
+	    maxDate: _react.PropTypes.object,
+	    onSelect: _react.PropTypes.func
 	};
 
 	DatePicker.defaultProps = {
 	    touchLen: 40,
 	    dateColor: '#fff',
+	    btnColor: '#fff',
 	    layerBackground: '#ffa70b',
-	    startDate: new Date(),
-	    minDate: new Date(2016, 3, 7),
-	    onSelect: function onSelect() {},
-	    onCancel: function onCancel() {}
+	    startDate: (0, _time.nextTime)(new Date(), 0),
+	    minDate: (0, _time.nextTime)(new Date(), -30),
+	    maxDate: (0, _time.nextTime)(new Date(), 0),
+	    onSelect: function onSelect() {}
 	};
 
 	exports.default = DatePicker;
@@ -366,7 +377,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return formate.replace(/Y+/, year).replace(/M+/, month).replace(/D+/, day).replace(/h+/, hour).replace(/m+/, minute).replace(/s+/, second);
 	}
 
-	function nextTime(now) {
+	function nextTime() {
+	    var now = arguments.length <= 0 || arguments[0] === undefined ? new Date() : arguments[0];
 	    var index = arguments.length <= 1 || arguments[1] === undefined ? 1 : arguments[1];
 
 	    if (Object.prototype.toString.call(now, null) !== '[object Date]') {
