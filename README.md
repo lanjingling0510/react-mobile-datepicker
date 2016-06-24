@@ -16,11 +16,11 @@ Using [npm](https://www.npmjs.com/):
 
 ```js
 // Using an ES6 transpiler like Babel
-import InfiniteCalendar from 'react-mobile-datepicker';
+import DatePicker from 'react-mobile-datepicker';
 import 'react-mobile-datepicker/dist/react-mobile-datepicker.css'; // Make sure to import the default stylesheet
 
 // Not using an ES6 transpiler
-var InfiniteCalendar = require('react-mobile-datepicker');
+var DatePicker = require('react-mobile-datepicker');
 require('react-mobile-datepicker/dist/react-mobile-datepicker.css');
 ```
 
