@@ -31,7 +31,7 @@ require('react-mobile-datepicker/dist/react-mobile-datepicker.css');
 ```js
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import InfiniteCalendar from 'react-mobile-datepicker';
+import DatePicker from 'react-mobile-datepicker';
 import 'react-mobile-datepicker/dist/react-mobile-datepicker.css'; // only needs to be imported once
 
 // Render the Calendar
