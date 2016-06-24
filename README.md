@@ -2,12 +2,15 @@
 [![Travis][build-badge]][build] [![npm package][npm-badge]][npm] [![Coveralls][coveralls-badge]][coveralls]
 
 一个移动端时间选择器react组件
+---------------------------------------
 
 
 安装
 ------------
 Using [npm](https://www.npmjs.com/):
-`$ npm install react-mobile-datepicker --save`
+
+	$ npm install react-mobile-datepicker --save
+
 
 然后，使用模块加载工具流，支持common.js或ES2015模块,例如[webpack](https://github.com/webpack/webpack)
 
@@ -26,7 +29,7 @@ require('react-mobile-datepicker/dist/react-mobile-datepicker.css');
 ### 例子
 
 ```js
-import React from 'react';
+import React, { Component } from 'react';
 import { render } from 'react-dom';
 import InfiniteCalendar from 'react-mobile-datepicker';
 import 'react-mobile-datepicker/dist/react-mobile-datepicker.css'; // only needs to be imported once
@@ -35,42 +38,44 @@ import 'react-mobile-datepicker/dist/react-mobile-datepicker.css'; // only needs
 var today = new Date();
 var minDate = Number(new Date()) - (24*60*60*1000) * 7; // One week before today
 
+class Wrap extends Component {
+	state = {
+		isOpen: true,
+	}
+	render() {
+		return (
+			<DatePicker
+				isOpen={this.state.isOpen}
+				startDate={today}
+				minDate={minDate}
+				onCancel={() => { this.state.isOpen = false; }}
+				onSelect={(time) => { console.log(time); }} />
+		);
+	}
+}
+
+
 render(
-    <DatePicker
-        isOpen={true}
-        startDate={today}
-        minDate={minDate}
-        onCancel={() => { isOpen = false; }}
-        onSelect={(time) => { console.log(time); }} />,
+  <Wrap />,
   document.getElementById('root')
 );
 ```
 
 
-目录
+Prop Types
 ------------
-```
-.
-├── .DS_Store
-├── .babelrc
-├── .eslintignore
-├── .eslintrc
-├── .git
-├── .gitignore
-├── .npmignore
-├── .travis.yml
-├── CHANGELOG.md
-├── README.md
-├── dist
-├── examples
-├── lib
-├── node_modules
-├── package.json
-├── scripts
-├── test
-└── webpack.config.js
 
-```
+| Property        | Type           | Default  | Description |
+| ------------- | ------------- | ---------------- |
+| btnColor      | String | #fff | 完成按钮颜色 |
+| dateColor      | String      | #fff  | 日期文字颜色 |
+| layerBackground | String     | #ffa70b | 背景颜色 |
+| isOpen | 	Boolean | true | 是否显示 |
+| startDate | Date | new Date() | 初始日期 |
+| minDate  | Date | 前一周 | 最小日期 |
+| maxDate  | Date | new Date() | 最小日期 |
+| onSelect | Function | () => {} | 点击完成后的回调函数, Date对象作为参数 |
+| onCancel | Function | () => {} | 隐藏时间选择器的回调函数 |
 
 Changelog
 -------------

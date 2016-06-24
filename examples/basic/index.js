@@ -9,6 +9,7 @@ import { nextTime } from '../../lib/time.js';
         <DatePicker
             isOpen={isOpen}
             startDate={nextTime(new Date(), -1)}
+            minDate={nextTime(new Date(), -3)}
             onCancel={() => { isOpen = false; }}
             onSelect={(time) => { console.log(time); }} />
     );
