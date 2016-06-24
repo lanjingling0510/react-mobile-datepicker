@@ -66,7 +66,7 @@ Prop Types
 ------------
 
 | Property        | Type           | Default  | Description |
-| ------------- | ------------- | ---------------- |
+|:------------- |:------------- |:-------------- |:---------- |
 | btnColor      | String | #fff | 完成按钮颜色 |
 | dateColor      | String      | #fff  | 日期文字颜色 |
 | layerBackground | String     | #ffa70b | 背景颜色 |
