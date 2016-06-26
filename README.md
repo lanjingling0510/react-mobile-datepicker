@@ -17,11 +17,11 @@ Using [npm](https://www.npmjs.com/):
 ```js
 // Using an ES6 transpiler like Babel
 import DatePicker from 'react-mobile-datepicker';
-import 'react-mobile-datepicker/dist/react-mobile-datepicker.css'; // Make sure to import the default stylesheet
+import 'react-mobile-datepicker/dist/mobile-datepicker.css'; // Make sure to import the default stylesheet
 
 // Not using an ES6 transpiler
 var DatePicker = require('react-mobile-datepicker');
-require('react-mobile-datepicker/dist/react-mobile-datepicker.css');
+require('react-mobile-datepicker/dist/mobile-datepicker.css');
 ```
 
 使用
@@ -31,8 +31,8 @@ require('react-mobile-datepicker/dist/react-mobile-datepicker.css');
 ```js
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import DatePicker from 'react-mobile-datepicker';
-import 'react-mobile-datepicker/dist/react-mobile-datepicker.css'; // only needs to be imported once
+import DatePicker from 'mobile-datepicker';
+import 'react-mobile-datepicker/dist/mobile-datepicker.css'; // only needs to be imported once
 
 // Render the Calendar
 var today = new Date();
