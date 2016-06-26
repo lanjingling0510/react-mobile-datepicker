@@ -1,18 +1,18 @@
 {
   "name": "react-mobile-datepicker",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "一个移动端时间选择器react组件",
   "main": "./dist/mobile-datepicker.js",
   "repository": "lanjingling0510/react-mobile-datepicker",
   "homepage": "https://github.com/lanjingling0510/react-mobile-datepicker#readme",
   "keywords": [
-      "react-component",
-      "date",
-      "datepicker",
-      "react",
-      "mobile"
-      "calendar"
-    ],
+    "react-component",
+    "date",
+    "datepicker",
+    "react",
+    "mobile",
+    "calendar"
+  ],
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server",
