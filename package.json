@@ -5,6 +5,14 @@
   "main": "./dist/mobile-datepicker.js",
   "repository": "lanjingling0510/react-mobile-datepicker",
   "homepage": "https://github.com/lanjingling0510/react-mobile-datepicker#readme",
+  "keywords": [
+      "react-component",
+      "date",
+      "datepicker",
+      "react",
+      "mobile"
+      "calendar"
+    ],
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server",
