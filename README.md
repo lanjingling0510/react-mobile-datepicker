@@ -4,6 +4,11 @@
 一个移动端时间选择器react组件
 ---------------------------------------
 
+<div style="padding:30px">
+<img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/preview.gif" width="300" />
+</div>
+
+
 
 安装
 ------------
@@ -60,7 +65,7 @@ Prop Types
 | layerBackground | String     | #ffa70b | 背景颜色 |
 | startDate | Date | new Date() | 初始日期 |
 | minDate  | Date | 前一周 | 最小日期 |
-| maxDate  | Date | new Date() | 最小日期 |
+| maxDate  | Date | new Date() | 最大日期 |
 | onSelect | Function | () => {} | 点击完成后的回调函数, Date对象作为参数 |
 
 Changelog
