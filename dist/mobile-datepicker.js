@@ -1,12 +1,12 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"));
+		module.exports = factory(require("React"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react"], factory);
+		define(["React"], factory);
 	else if(typeof exports === 'object')
-		exports["InfiniteScroll"] = factory(require("react"));
+		exports["DatePicker"] = factory(require("React"));
 	else
-		root["InfiniteScroll"] = factory(root["react"]);
+		root["DatePicker"] = factory(root["React"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_3__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -60,7 +60,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _DatePicker = __webpack_require__(1);
+	__webpack_require__(1);
+
+	var _DatePicker = __webpack_require__(2);
 
 	var _DatePicker2 = _interopRequireDefault(_DatePicker);
 
@@ -70,6 +72,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79,8 +87,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	__webpack_require__(2);
 
 	var _react = __webpack_require__(3);
 
@@ -104,7 +110,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @module DatePicker组件
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
-
 	/**
 	 * Class DatePicker组件类
 	 * @extends Component
@@ -127,9 +132,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            };
 	        });
 
-	        _this.animating = false;
-	        _this.touchY = 0;
-	        _this.angle = 0;
+	        _this.animating = false; // 判断是否在transition过渡动画之中
+	        _this.touchY = 0; // 保存touchstart的pageY
+	        _this.angle = 0; // 容器转过的角度
 	        _this.state = {
 	            angle: 0,
 	            dates: dates
@@ -143,16 +148,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return _this;
 	    }
 
+	    /**
+	     * 根据角度返回透明度(0-1之间)
+	     * @param {number} angle 角度
+	     * @return
+	     */
+
+
 	    _createClass(DatePicker, [{
 	        key: '_setOpacity',
 	        value: function _setOpacity(angle) {
 	            return angle > 0 ? ((40 - angle) / 40 * 100 | 0) / 100 : ((40 + angle) / 40 * 100 | 0) / 100;
 	        }
+
+	        /**
+	         * 清除对象的transition样式
+	         * @param  {Dom}     obj     指定的对象
+	         * @return {undefined}
+	         */
+
 	    }, {
 	        key: '_clearTransition',
 	        value: function _clearTransition(obj) {
 	            obj.style[_transition.TRANSITION] = ''; // eslint-disable-line
 	        }
+
+	        /**
+	         * 滑动到下一日期
+	         * @param  {number} direction 滑动方向
+	         * @return {undefined}
+	         */
+
 	    }, {
 	        key: '_moveToNext',
 	        value: function _moveToNext(direction) {
@@ -174,6 +200,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this._moveTo(scroll, angle + direction * 22.5);
 	            }
 	        }
+
+	        /**
+	         * 添加滑动动画
+	         * @param  {DOM} obj   DOM对象
+	         * @param  {number} angle 角度
+	         * @return {undefined}
+	         */
+
 	    }, {
 	        key: '_moveTo',
 	        value: function _moveTo(obj, angle) {
@@ -183,6 +217,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                angle: angle
 	            });
 	        }
+
+	        /**
+	         * 点击完成按钮事件
+	         * @return {undefined}
+	         */
+
 	    }, {
 	        key: 'handleFinishBtnClick',
 	        value: function handleFinishBtnClick() {
@@ -193,6 +233,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	            this.props.onSelect(date.value);
 	        }
+
+	        /**
+	         * 滑动日期选择器事件
+	         * @param  {Object} event 事件对象
+	         * @return {undefined}
+	         */
+
 	    }, {
 	        key: 'handleContentTouch',
 	        value: function handleContentTouch(event) {
@@ -217,6 +264,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                }
 	            }
 	        }
+
+	        /**
+	         * transition过渡完成事件
+	         * @return {undefined}
+	         */
+
 	    }, {
 	        key: 'handleContentTransitionEnd',
 	        value: function handleContentTransitionEnd() {
@@ -242,6 +295,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                angle: 0
 	            });
 	        }
+
+	        /**
+	         * 渲染一个日期DOM对象
+	         * @param  {Object} date date数据
+	         * @return {Object}      JSX对象
+	         */
+
 	    }, {
 	        key: 'renderDatepickerItem',
 	        value: function renderDatepickerItem(date) {
@@ -256,6 +316,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                date.name
 	            );
 	        }
+
+	        /**
+	         * render函数
+	         * @return {Object} JSX对象
+	         */
+
 	    }, {
 	        key: 'render',
 	        value: function render() {
@@ -340,16 +406,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = DatePicker;
 
 /***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
 /* 3 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
+	module.exports = React;
 
 /***/ },
 /* 4 */
@@ -365,6 +425,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+	/**
+	 * @module time工具
+	 */
+
 	function convertDate(timestamp, formate) {
 	    var date = new Date(timestamp);
 	    var year = date.getFullYear();
@@ -377,6 +441,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return formate.replace(/Y+/, year).replace(/M+/, month).replace(/D+/, day).replace(/h+/, hour).replace(/m+/, minute).replace(/s+/, second);
 	}
 
+	/**
+	 * 获取相对日期的偏移日期
+	 * @param  {Date}       日期
+	 * @return {number}     相对的天数
+	 */
 	function nextTime() {
 	    var now = arguments.length <= 0 || arguments[0] === undefined ? new Date() : arguments[0];
 	    var index = arguments.length <= 1 || arguments[1] === undefined ? 1 : arguments[1];
@@ -390,6 +459,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return date;
 	}
 
+	/**
+	 * 获取指定日期的格式化日期名称
+	 * @param  {Date}     日期
+	 * @return {String}   格式化日期名称
+	 */
 	function getTimeName(now) {
 	    var _expection;
 
@@ -425,7 +499,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    exports.TRANSITIONEND = TRANSITIONEND = 'transitionend';
 	    exports.TRANSITION_CSS = TRANSITION_CSS = 'transition';
 	} else if (typeof document.body.style.webkitTransition === 'string') {
-	    exports.TRANSITION = TRANSITION = 'webkitTransition';
+	    exports.TRANSITION = TRANSITION = 'WebkitTransition';
 	    exports.TRANSITION_CSS = TRANSITION_CSS = '-webkit-transition';
 	    exports.TRANSITIONEND = TRANSITIONEND = 'webkitTransitionEnd';
 	}
@@ -436,7 +510,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    exports.TRANSFORM = TRANSFORM = 'transform';
 	    exports.TRANSFORM_CSS = TRANSFORM_CSS = 'transform';
 	} else if (typeof document.body.style.webkitTransform === 'string') {
-	    exports.TRANSFORM = TRANSFORM = 'webkitTransform';
+	    exports.TRANSFORM = TRANSFORM = 'WebkitTransform';
 	    exports.TRANSFORM_CSS = TRANSFORM_CSS = '-webkit-transform';
 	}
 

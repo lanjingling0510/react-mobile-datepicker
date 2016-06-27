@@ -88,7 +88,7 @@ if (TARGET === 'build') {
           path: 'dist',
           publicPath: '/',
           libraryTarget: 'umd',
-          library: 'InfiniteScroll'
+          library: 'DatePicker'
         },
         externals: [
             'react',

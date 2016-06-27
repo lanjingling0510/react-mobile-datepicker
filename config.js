@@ -1,3 +1,3 @@
 module.exports =  {
-    name: 'mobile-datepicker'
+    name: 'mobile-datepicker',
 };
