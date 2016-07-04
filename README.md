@@ -63,7 +63,7 @@ Prop Types
 | btnColor      | String | #fff | 完成按钮颜色 |
 | dateColor      | String      | #fff  | 日期文字颜色 |
 | layerBackground | String     | #ffa70b | 背景颜色 |
-| startDate | Date | new Date() | 初始日期 |
+| date | Date | new Date() | 初始日期 |
 | minDate  | Date | 前一周 | 最小日期 |
 | maxDate  | Date | new Date() | 最大日期 |
 | onSelect | Function | () => {} | 点击完成后的回调函数, Date对象作为参数 |

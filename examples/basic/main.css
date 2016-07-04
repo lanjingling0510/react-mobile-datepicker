@@ -4,7 +4,9 @@
 }
 
 .container {
-    position: relative;
+    position: absolute;
     width: 320px;
     height: 568px;
+    bottom: 0;
+    left: 0;
 }
