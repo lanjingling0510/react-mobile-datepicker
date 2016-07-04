@@ -1,6 +1,6 @@
 {
   "name": "react-mobile-datepicker",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "一个移动端时间选择器react组件",
   "main": "./dist/mobile-datepicker.js",
   "repository": "lanjingling0510/react-mobile-datepicker",
@@ -64,6 +64,9 @@
   "dependencies": {
     "react": "^15.2.0",
     "react-dom": "^15.2.0"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0"
   },
   "license": "ISC"
 }
