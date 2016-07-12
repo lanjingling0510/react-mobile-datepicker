@@ -137,7 +137,7 @@ describe('时间选择器组件DatePicker', () => {
                 changedTouches: [{ pageY: 50 }],
             };
 
-            datePicker.setState({ minDate: productDate(new Date(2010, 2, 7)) });
+            datePicker.setProps({ minDate: new Date(2010, 2, 7) });
             yearPicker.simulate('touchStart', touchstartEvent);
             yearPicker.simulate('touchEnd', touchendEvent);
             yearPicker.simulate('transitionEnd', touchendEvent);
@@ -162,7 +162,7 @@ describe('时间选择器组件DatePicker', () => {
                 changedTouches: [{ pageY: -50 }],
             };
 
-            datePicker.setState({ maxDate: productDate(new Date(2010, 2, 7)) });
+            datePicker.setProps({ maxDate: new Date(2010, 2, 7) });
             yearPicker.simulate('touchStart', touchstartEvent);
             yearPicker.simulate('touchEnd', touchendEvent);
             yearPicker.simulate('transitionEnd', touchendEvent);
