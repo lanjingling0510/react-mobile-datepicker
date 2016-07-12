@@ -124,7 +124,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DatePicker).call(this, props));
 
 	        _this.state = {
-	            angle: 0,
 	            date: _this._productDate(props.date),
 	            minDate: _this._productDate(props.minDate),
 	            maxDate: _this._productDate(props.maxDate)
@@ -136,6 +135,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    _createClass(DatePicker, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            this.setState({
+	                date: this._productDate(nextProps.date),
+	                minDate: this._productDate(nextProps.minDate),
+	                maxDate: this._productDate(nextProps.maxDate)
+	            });
+	        }
+	    }, {
+	        key: 'shouldComponentUpdate',
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            return nextState.date.timestamp !== this.state.date.timestamp || nextProps.date !== this.props.date || nextProps.minDate !== this.props.minDate || nextProps.maxDate !== this.props.maxDate;
+	        }
+	    }, {
 	        key: '_productDate',
 	        value: function _productDate(date) {
 	            var nDate = (0, _time.nextDate)(date, 0);
