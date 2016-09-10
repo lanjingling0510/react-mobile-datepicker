@@ -62,7 +62,7 @@ class App extends React.Component {
 					select time
 				</a>
 				<p className="select-time ">
-					{convertDate(this.state.time, 'YYYY-MM-DD')}
+					{this.state.time}
 				</p>
 
 				<DatePicker
