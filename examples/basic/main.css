@@ -5,8 +5,28 @@
 
 .container {
     position: absolute;
-    width: 320px;
-    height: 568px;
     bottom: 0;
     left: 0;
+    top: 0;
+    right: 0;
+    text-align: center;
+    padding:1rem;
+}
+
+.select-btn {
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin: 1rem 0;
+    cursor: pointer;
+    &.sm {
+        margin: .5rem .5rem;
+        padding: .5rem;
+        color: #fff;
+    }
+}
+
+.select-time {
+    margin-top: 1rem;
+    font-size: 2rem;
 }

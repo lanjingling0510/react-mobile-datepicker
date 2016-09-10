@@ -1,8 +1,12 @@
 # react-mobile-datepicker
 [![Travis][build-badge]][build] [![npm package][npm-badge]][npm] [![Coveralls][coveralls-badge]][coveralls]
 
-一个移动端时间选择器react组件
----------------------------------------
+
+**a  lightweight react date picker for mobile, Not more than 4k**
+
+react-mobile-datepicker provides a component that can set year, month and day by sliding up or down.
+
+
 
 <div style="padding:30px">
 <img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/preview.gif" width="300" />
@@ -10,72 +14,93 @@
 
 
 
-安装
-------------
+
+## Getting Started
+
+### Install
+
 Using [npm](https://www.npmjs.com/):
 
 	$ npm install react-mobile-datepicker --save
 
+### Import what you need
+The following guide assumes you have some sort of ES2015 build set up using babel and/or webpack/browserify/gulp/grunt/etc.
 
-然后，使用模块加载工具流，支持common.js或ES2015模块,例如[webpack](https://github.com/webpack/webpack)
 
 ```js
 // Using an ES6 transpiler like Babel
+import  React from 'react';
+import ReactDOM from 'react-dom';
 import DatePicker from 'react-mobile-datepicker';
-import 'react-mobile-datepicker/dist/mobile-datepicker.css'; // Make sure to import the default stylesheet
-
-// Not using an ES6 transpiler
-var DatePicker = require('react-mobile-datepicker');
-require('react-mobile-datepicker/dist/mobile-datepicker.css');
 ```
 
-使用
-------------
-### 例子
+
+### Usage Example
+
 
 ```js
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import DatePicker from 'mobile-datepicker';
-import 'react-mobile-datepicker/dist/mobile-datepicker.css'; // only needs to be imported once
+class App extends React.Component {
+	state = {
+		time: new Date(),
+		isOpen: false,
+	}
 
-// Render the Calendar
-var today = new Date();
-var minDate = Number(new Date()) - (24*60*60*1000) * 7; // One week before today
+	handleClick = () => {
+		this.setState({ isOpen: true });
+	}
+
+	handleSelect = (time) => {
+		this.setState({ time, isOpen: false });
+	}
+
+	render() {
+		return (
+			<div className="App">
+				<a
+					className="select-btn"
+					onClick={this.handleClick}>
+					select time
+				</a>
+				<p className="select-time ">
+					{convertDate(this.state.time, 'YYYY-MM-DD')}
+				</p>
+
+				<DatePicker
+					date={this.state.time}
+					isOpen={this.state.isOpen}
+					onSelect={this.handleSelect} />
+			</div>
+		);
+	}
+}
 
 
-
-render(
-	<DatePicker
-		startDate={today}
-		minDate={minDate}
-		onSelect={(time) => { console.log(time); }} />,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('react-box'));
 ```
 
 
-Prop Types
-------------
+## PropTypes
 
 | Property        | Type           | Default  | Description |
 |:------------- |:------------- |:-------------- |:---------- |
-| btnColor      | String | #fff | 完成按钮颜色 |
-| dateColor      | String      | #fff  | 日期文字颜色 |
-| layerBackground | String     | #ffa70b | 背景颜色 |
-| date | Date | new Date() | 初始日期 |
-| minDate  | Date | 前一周 | 最小日期 |
-| maxDate  | Date | new Date() | 最大日期 |
-| onSelect | Function | () => {} | 点击完成后的回调函数, Date对象作为参数 |
+| btnColor      | String | #fff | done button color |
+| dateColor      | String      | #fff  | date of text color |
+| layerBackground | String     | #ffa70b | background color |
+| date | Date | new Date() | date value |
+| minDate  | Date | new Date(1970, 0, 1) | minimum date |
+| maxDate  | Date | new Date(2050, 0, 1) | maximum date |
+| onSelect | Function | () => {} | the callback function after click button of done, Date object as a parameter |
 
-Changelog
--------------
+## Changelog
+* [Changelog](CHANGELOG.md)
 
-v1.0.3 - Thu, 23 Jun 2016 13:22:13 GMT
---------------------------------------
+## How to Contribute
 
-- [5a93fe9](../../commit/5a93fe9) [changed] 更新了READEME
-
+Anyone and everyone is welcome to contribute to this project. The best way to
+start is by checking our [open issues](https://github.com/lanjingling0510/react-mobile-datepicker/issues),
+[submit a new issues](https://github.com/lanjingling0510/react-mobile-datepicker/issues/new?labels=bug) or
+[feature request](https://github.com/lanjingling0510/react-mobile-datepicker/issues/new?labels=enhancement),
+participate in discussions, upvote or downvote the issues you like or dislike.
 
 
 
