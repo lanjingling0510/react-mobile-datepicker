@@ -1,6 +1,6 @@
 {
   "name": "react-mobile-datepicker",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "一个移动端时间选择器react组件",
   "main": "./dist/react-mobile-datepicker.js",
   "amdName": "reactMobileDatePicker",

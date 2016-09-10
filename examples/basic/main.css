@@ -11,6 +11,7 @@
     right: 0;
     text-align: center;
     padding:1rem;
+    background: #eee;
 }
 
 .select-btn {
@@ -19,6 +20,7 @@
     padding: 1rem;
     margin: 1rem 0;
     cursor: pointer;
+    background: #fff;
     &.sm {
         margin: .5rem .5rem;
         padding: .5rem;
