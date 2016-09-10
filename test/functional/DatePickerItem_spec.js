@@ -120,9 +120,22 @@ describe('DatePickerItem.js测试', () => {
                     typeName="Date" />
             );
 
-            datePicker.find('.datepicker-viewport').simulate('touchStart');
-            datePicker.find('.datepicker-viewport').simulate('touchMove');
-            datePicker.find('.datepicker-viewport').simulate('touchEnd');
+            const touchstartEvent = {
+                type: 'touchstart',
+                targetTouches: [{ pageY: 0 }],
+            };
+            const touchmoveEvent = {
+                type: 'touchstart',
+                targetTouches: [{ pageY: 20 }],
+            };
+            const touchendEvent = {
+                type: 'touchend',
+                changedTouches: [{ pageY: 50 }],
+            };
+
+            datePicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
+            datePicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
+            datePicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
             sinon.assert.callCount(spyFunction, 3);
             spyFunction.restore();
         })
