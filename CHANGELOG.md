@@ -1,3 +1,9 @@
+v2.0.5 - Sat, 10 Sep 2016 10:16:55 GMT
+--------------------------------------
+
+- [9e2df2f](../../commit/9e2df2f) [changed] add modal layer and add rollup for production
+
+
 v2.0.4 - Tue, 12 Jul 2016 09:16:42 GMT
 --------------------------------------
 

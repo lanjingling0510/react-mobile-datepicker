@@ -28,6 +28,14 @@ describe('时间选择器组件DatePicker', () => {
         before(function() {
             datePicker = mount(
                 <DatePicker
+                    touchLen={40}
+                    dateColor={'#fff'}
+                    btnColor={'#fff'}
+                    layerBackground={'#ffa70b'}
+                    date={new Date()}
+                    minDate={new Date(1970, 0, 1)}
+                    maxDate={new Date(2050, 0, 1)}
+                    onSelect={() => {}}
                     date={new Date(2010, 2, 7)}/>
             );
             yearPicker = datePicker.find(DatePickerItem).first();

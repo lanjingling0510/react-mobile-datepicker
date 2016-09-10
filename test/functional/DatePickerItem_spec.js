@@ -136,6 +136,8 @@ describe('DatePickerItem.js测试', () => {
                     date={productDate(new Date(2010, 3, 7))}
                     minDate={productDate(new Date(2010, 3, 6))}
                     maxDate={productDate(new Date(2010, 3, 7))}
+                    touchLen={40}
+                    onSelect={() => {}}
                     typeName="Date" />
             );
             const touchstartEvent = {
@@ -159,6 +161,8 @@ describe('DatePickerItem.js测试', () => {
                     date={productDate(new Date(2010, 3, 7))}
                     minDate={productDate(new Date(2010, 3, 6))}
                     maxDate={productDate(new Date(2010, 3, 7))}
+                    touchLen={40}
+                    onSelect={() => {}}
                     typeName="Date" />
             );
             const touchstartEvent = {
