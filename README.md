@@ -6,6 +6,10 @@
 
 react-mobile-datepicker provides a component that can set year, month and day by sliding up or down.
 
+## Features
+
+- is only 4k.
+- It does not depend on moment.js
 
 
 <div style="padding:30px">
