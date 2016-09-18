@@ -1,3 +1,9 @@
+v3.0.0 - Sun, 18 Sep 2016 09:28:28 GMT
+--------------------------------------
+
+- [14b868c](../../commit/14b868c) [changed] ✅ update version,An increase of five theme,A slide can move multiple dates.
+
+
 v2.0.7 - Tue, 13 Sep 2016 04:44:41 GMT
 --------------------------------------
 
