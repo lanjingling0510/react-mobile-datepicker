@@ -53,6 +53,10 @@ class App extends React.Component {
 		this.setState({ isOpen: true });
 	}
 
+	handleCancel = () => {
+		this.setState({ isOpen: false });
+	}
+
 	handleSelect = (time) => {
 		this.setState({ time, isOpen: false });
 	}
@@ -70,9 +74,10 @@ class App extends React.Component {
 				</p>
 
 				<DatePicker
-					date={this.state.time}
+					value={this.state.time}
 					isOpen={this.state.isOpen}
-					onSelect={this.handleSelect} />
+					onSelect={this.handleSelect}
+					onCancel={this.handleCancel} />
 			</div>
 		);
 	}
@@ -87,13 +92,14 @@ ReactDOM.render(<App />, document.getElementById('react-box'));
 
 | Property        | Type           | Default  | Description |
 |:------------- |:------------- |:-------------- |:---------- |
-| btnColor      | String | #fff | done button color |
-| dateColor      | String      | #fff  | date of text color |
-| layerBackground | String     | #ffa70b | background color |
-| date | Date | new Date() | date value |
-| minDate  | Date | new Date(1970, 0, 1) | minimum date |
-| maxDate  | Date | new Date(2050, 0, 1) | maximum date |
+| isOpen      | Boolean | false | whether to open datepicker |
+| theme      | String      | default  | theme of datepicker, include 'default', 'dark', 'ios', 'android', 'android-dark' |
+| dateFormat | Array     | ['YYYY', 'M', 'D'] | according to year, month, day format specified display text. E.g ['YYYY年', 'MM月', 'DD日']|
+| value | Date | new Date() | date value |
+| min  | Date | new Date(1970, 0, 1) | minimum date |
+| max | Date | new Date(2050, 0, 1) | maximum date |
 | onSelect | Function | () => {} | the callback function after click button of done, Date object as a parameter |
+| onCancel | Function | () => {} | the callback function after click button of cancel |
 
 ## Changelog
 * [Changelog](CHANGELOG.md)

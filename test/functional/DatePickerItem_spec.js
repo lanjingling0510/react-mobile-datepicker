@@ -6,118 +6,66 @@ import { mount, shallow } from 'enzyme';
 import DatePickerItem from '../../lib/DatePickerItem';
 import {getTime, nextDate} from '../../lib/time';
 
-function productDate(date) {
-    const nDate = nextDate(date, 0);
-    return {
-        value: nDate,
-        timestamp: nDate.getTime(),
-        Year: getTime(nDate, 'Year'),
-        Month: getTime(nDate, 'Month'),
-        Date: getTime(nDate, 'Date'),
-    };
+
+const DEFAULT_PROPS = {
+    value: new Date(2010, 3, 7),
+    min: new Date(2010, 2, 6),
+    max: new Date(2010, 4, 8),
+    format: 'M',
+    onSelect: () => {},
 }
 
-describe('DatePickerItem.js测试', () => {
-    describe('测试Lifecycle', () => {
-        it('应该调用componentWillMount,应该并更新state', () => {
+describe('DatePickerItem.js', () => {
+    describe('Lifecycle', () => {
+        it('should call componentWillMount and initialize dates of state', () => {
             const spyFunction = sinon.spy(DatePickerItem.prototype, 'componentWillMount');
             const datePicker = mount(
-                <DatePickerItem
-                    date={productDate(new Date(2010, 3, 7))}
-                    minDate={productDate(new Date(2010, 3, 6))}
-                    maxDate={productDate(new Date(2010, 3, 8))}
-                    typeName="Date" />
+                <DatePickerItem {...DEFAULT_PROPS} typeName="Date" />
             );
             const dates = datePicker.state('dates');
             sinon.assert.calledOnce(spyFunction);
-            expect(dates).to.deep.equals(
-                Array(...Array(5)).map((value, index) => {
-                    const date = nextDate(new Date(2010, 3, 7), index - 2);
-                    return {
-                        ...getTime(date, 'Date'),
-                        angle: (2 - index) * 22.5,
-                    };
+            expect(dates).to.eql(
+                Array(...Array(10)).map((value, index) => {
+                    return nextDate(DEFAULT_PROPS.value, index - 5);
                 }));
             spyFunction.restore();
         })
 
 
-        it('应该调用componentWillReceiveProps,并传入this._moveTo正确的参数(多种情况)', () => {
+        it('componentWillReceiveProps', () => {
             const spyFunction = sinon.spy(DatePickerItem.prototype, 'componentWillReceiveProps');
-            const spyFunction2 = sinon.spy(DatePickerItem.prototype, '_moveTo');
             const datePicker = mount(
-                <DatePickerItem
-                    date={productDate(new Date(2010, 3, 7))}
-                    minDate={productDate(new Date(2010, 3, 6))}
-                    maxDate={productDate(new Date(2010, 3, 8))}
-                    typeName="Date" />
+                <DatePickerItem {...DEFAULT_PROPS} typeName="Date" />
             );
-            datePicker.setProps({ date: productDate(new Date(2010, 3, 8)) });
+            datePicker.setProps({ date: new Date(2010, 3, 10) });
+            const dates = datePicker.state('dates');
+            const translateY = datePicker.state('translateY');
+            const marginTop = datePicker.state('marginTop');
+
             sinon.assert.calledOnce(spyFunction);
-            expect(spyFunction2.getCall(0).args[1]).to.equals(datePicker.instance().angle + 22.5);
+            expect(translateY).to.equal(-40 * 5);
+            expect(marginTop).to.equal(0);
             spyFunction.restore();
-            spyFunction2.restore();
+        })
+
+        it('shouldComponentUpdate', () => {
+            const spyFunction = sinon.spy(DatePickerItem.prototype, 'shouldComponentUpdate');
+            const datePicker = mount(
+                <DatePickerItem {...DEFAULT_PROPS} typeName="Date" />
+            );
+
+            datePicker.setProps({ value: new Date(2010, 3, 10) });
+            expect(spyFunction.returned(true)).to.equal(true);
+            datePicker.setProps({ value: new Date(2010, 3, 10) });
+            expect(spyFunction.returned(false)).to.equal(true);
         })
     })
 
-    describe('测试方法:', () => {
-        it('_setOpacity应该返回相应的值，当传入不同的临界值', () => {
-            const datePicker = mount(
-                <DatePickerItem
-                    date={productDate(new Date(2010, 3, 7))}
-                    minDate={productDate(new Date(2010, 3, 6))}
-                    maxDate={productDate(new Date(2010, 3, 8))}
-                    typeName="Date" />
-             );
-             const inst = datePicker.instance();
-             const test1 = [0, 1];
-             const test2 = [40, 0];
-             const test3 = [-40, 0];
-             expect(inst._setOpacity(test1[0])).to.equals(test1[1]);
-             expect(inst._setOpacity(test2[0])).to.equals(test2[1]);
-             expect(inst._setOpacity(test3[0])).to.equals(test3[1]);
-        })
-
-        it('_moveToNext应该调用this.props.onSelect, 当可以canMove为true时', () => {
-            const spyFunction = sinon.spy();
-            const datePicker = mount(
-                <DatePickerItem
-                    date={productDate(new Date(2010, 3, 7))}
-                    minDate={productDate(new Date(2010, 3, 6))}
-                    maxDate={productDate(new Date(2010, 3, 8))}
-                    typeName="Date"
-                    onSelect={spyFunction} />
-             );
-             const inst = datePicker.instance();
-             inst._moveToNext(1);
-             sinon.assert.calledOnce(spyFunction);
-        })
-
-        it('_moveToNext应该调用this._moveTo, 当可以canMove为false时', () => {
-            const spyFunction = sinon.spy(DatePickerItem.prototype, '_moveTo');
-            const datePicker = mount(
-                <DatePickerItem
-                    date={productDate(new Date(2010, 3, 7))}
-                    minDate={productDate(new Date(2010, 3, 6))}
-                    maxDate={productDate(new Date(2010, 3, 7))}
-                    typeName="Date" />
-             );
-             const inst = datePicker.instance();
-             inst._moveToNext(1);
-             sinon.assert.calledOnce(spyFunction);
-             spyFunction.restore();
-        })
-    })
-
-    describe('测试交互事件:', () => {
-        it('应该触发handleContent3次, 在触摸屏幕之后', () => {
+    describe('event', () => {
+        it('should call handleContent three times after touching', () => {
             const spyFunction = sinon.spy(DatePickerItem.prototype, 'handleContentTouch');
             const datePicker = mount(
-                <DatePickerItem
-                    date={productDate(new Date(2010, 3, 7))}
-                    minDate={productDate(new Date(2010, 3, 6))}
-                    maxDate={productDate(new Date(2010, 3, 8))}
-                    typeName="Date" />
+                <DatePickerItem {...DEFAULT_PROPS} typeName="Date" />
             );
 
             const touchstartEvent = {
@@ -125,7 +73,7 @@ describe('DatePickerItem.js测试', () => {
                 targetTouches: [{ pageY: 0 }],
             };
             const touchmoveEvent = {
-                type: 'touchstart',
+                type: 'touchmove',
                 targetTouches: [{ pageY: 20 }],
             };
             const touchendEvent = {
@@ -141,17 +89,11 @@ describe('DatePickerItem.js测试', () => {
         })
     })
 
-    describe('测试逻辑', () => {
-        it('应该向_moveToNext传入正确direction, 当滑动超过touchLen', () => {
+    describe('logic', () => {
+        it('should analyzing the right direction', () => {
             const spyFunction = sinon.spy(DatePickerItem.prototype, '_moveToNext');
             const datePicker = mount(
-                <DatePickerItem
-                    date={productDate(new Date(2010, 3, 7))}
-                    minDate={productDate(new Date(2010, 3, 6))}
-                    maxDate={productDate(new Date(2010, 3, 7))}
-                    touchLen={40}
-                    onSelect={() => {}}
-                    typeName="Date" />
+                <DatePickerItem {...DEFAULT_PROPS} typeName="Date" />
             );
             const touchstartEvent = {
                 type: 'touchstart',
@@ -163,33 +105,71 @@ describe('DatePickerItem.js测试', () => {
             };
             datePicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
             datePicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
-            sinon.assert.calledOnce(spyFunction);
+            expect(spyFunction.getCall(0).args[0]).to.equal(-1);
+
+            const datePicker2 = mount(
+                <DatePickerItem {...DEFAULT_PROPS} typeName="Date" />
+            );
+            const touchstartEvent2 = {
+                type: 'touchstart',
+                targetTouches: [{ pageY: 0 }],
+            };
+            const touchendEvent2 = {
+                type: 'touchend',
+                changedTouches: [{ pageY: -50 }],
+            };
+            datePicker2.find('.datepicker-viewport').simulate('touchStart', touchstartEvent2);
+            datePicker2.find('.datepicker-viewport').simulate('touchEnd', touchendEvent2);
+            expect(spyFunction.getCall(1).args[0]).to.equal(1);
             spyFunction.restore();
         })
 
-        it('应该调用_moveTo, 当向上滑动未超过touchLen', () => {
-            const spyFunction = sinon.spy(DatePickerItem.prototype, '_moveTo');
+
+        it('should update dates of state, When the sliding more than 20', () => {
+            const spyFunction = sinon.spy(DatePickerItem.prototype, '_updateDates');
             const datePicker = mount(
-                <DatePickerItem
-                    date={productDate(new Date(2010, 3, 7))}
-                    minDate={productDate(new Date(2010, 3, 6))}
-                    maxDate={productDate(new Date(2010, 3, 7))}
-                    touchLen={40}
-                    onSelect={() => {}}
-                    typeName="Date" />
+                <DatePickerItem {...DEFAULT_PROPS} typeName="Date" />
             );
             const touchstartEvent = {
                 type: 'touchstart',
                 targetTouches: [{ pageY: 0 }],
             };
             const touchendEvent = {
+                type: 'touchmove',
+                targetTouches: [{ pageY: 21 }],
+            };
+            datePicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
+            datePicker.find('.datepicker-viewport').simulate('touchMove', touchendEvent);
+            sinon.assert.calledOnce(spyFunction);
+            spyFunction.restore();
+        })
+
+        it ('should not exceed the maximum, when the slide to the border', () => {
+            const props = {
+                value: new Date(2010, 3, 7),
+                min: new Date(2010, 2, 6),
+                max: new Date(2010, 3, 7),
+                suffix: '',
+                onSelect: () => {},
+            };
+
+            const spyFunction = sinon.spy(DatePickerItem.prototype, '_moveTo');
+            const datePicker = mount(
+                <DatePickerItem {...props} typeName="Date" />
+            );
+
+            const touchstartEvent = {
+                type: 'touchstart',
+                targetTouches: [{ pageY: 0 }],
+            };
+            const touchendEvent = {
                 type: 'touchend',
-                changedTouches: [{ pageY: 39 }],
+                changedTouches: [{ pageY: -21 }],
             };
             datePicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
             datePicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
-            sinon.assert.calledOnce(spyFunction);
-            spyFunction.restore();
+
+            expect(spyFunction.getCall(0).args[1]).to.equal(5);
         })
     })
 });

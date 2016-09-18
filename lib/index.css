@@ -1,3 +1,29 @@
+:root {
+    --default-bg: #f7f7f7;
+    --default-color: color(var(--default-bg) contrast(50%));
+    --default-disabled-color: color(var(--default-color) blend(var(--default-bg) 70%));
+    --default-theme: #4eccc4;
+
+    --dark-bg: #263238;
+    --dark-color: color(var(--dark-bg) contrast(50%));
+    --dark-disabled-color: color(var(--dark-color) blend(var(--dark-bg) 70%));
+    --dark-theme: #50ccc4;
+
+    --ios-bg: #f7f7f7;
+    --ios-color: color(var(--ios-bg) contrast(50%));
+    --ios-disabled-color: color(var(--ios-color) blend(var(--ios-bg) 70%));
+    --ios-theme: #dbdbdb;
+
+    --android-bg: #f5f5f5;
+    --android-color: color(var(--android-bg) contrast(50%));
+    --android-disabled-color: color(var(--android-color) blend(var(--android-bg) 70%));
+    --android-theme: #31b6e7;
+
+    --android-dark-bg: #292829;
+    --android-dark-color: color(var(--android-dark-bg) contrast(50%));
+    --android-dark-disabled-color: color(var(--android-dark-color) blend(var(--android-dark-bg) 70%));
+}
+
 .datepicker-modal {
     position: fixed;
     right: 0;
@@ -17,52 +43,240 @@
     bottom: 0;
     width: 100%;
     z-index: 1;
-    border-top: 2px solid rgb(215,212,212);
-    height: 244px;
-    font-size: 12px;
+    height: 266px;
+    font-size: 16px;
+    text-align: center;
+    font-family: arial,verdana,sans-serif;
+    box-sizing: content-box;
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
 
-    .datepicker-navbar {
-        background: rgba(242, 241, 240, 0.3);
-        padding: 0.5em 0.8em;
-        text-align: right;
+    .datepicker-header {
+        padding: 0 .5em;
+        min-height: 2em;
+        line-height: 2em;
+        font-size: 1.125em;
+        display: none;
     }
 
-    .datepicker-finish-btn {
-        font: 1.2em/17px 微软雅黑;
+    .datepicker-navbar {
+        padding: 0 .5em .5em .5em;
+        overflow: hidden;
+    }
+
+    .datepicker-navbar-btn {
+        height: 2.5em;
+        line-height: 2.5em;
+        float: right;
+        padding: 0 1em;
+        cursor: pointer;
     }
 
     .datepicker-content {
         display: flex;
-        position: absolute;
-        top: 39px;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: 0 .5em .5em .5em;
+        padding: .5em .25em;
+    }
+
+    .datepicker-col-1 {
+        flex: 1;
+        margin: 0 .25em;
     }
 
     .datepicker-viewport {
-        padding-top: 84px;
-        flex: 1;
-        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.2) 100%);
-        margin: 0 0.5em;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+        &::after {
+            content: '';
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            pointer-events: none;
+        }
     }
 
+    .datepicker-wheel {
+        position: absolute;
+        height: 40px;
+        top: 50%;
+        margin-top: -20px;
+        width: 100%;
+    }
+
+
     .datepicker-scroll {
-        transform-style: preserve-3d;
-        perspective: 800px;
-        position: relative;
         list-style-type: none;
-        height: 33px;
-        z-index: -1;
         &>li {
-            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            font-size: 1.375em;
+            cursor: pointer;
+        }
+    }
+}
+
+.datepicker {
+
+    /* default */
+    &.default {
+        background-color: var(--default-bg);
+        .datepicker-wheel {
+            border-top: 1px solid var(--default-theme);
+            border-bottom: 1px solid var(--default-theme);
+        }
+        .datepicker-scroll {
+            li {
+                color: var(--default-color);
+            }
+
+            li.disabled {
+                color: var(--default-disabled-color);
+            }
+        }
+        .datepicker-navbar-btn {
+            color: var(--default-theme);
+        }
+    }
+
+    /* dark */
+    &.dark {
+        background-color: var(--dark-bg);
+        .datepicker-wheel {
+            border-top: 1px solid var(--dark-theme);
+            border-bottom: 1px solid var(--dark-theme);
+        }
+        .datepicker-scroll {
+            li {
+                color: var(--dark-color);
+            }
+
+            li.disabled {
+                color: var(--dark-disabled-color);
+            }
+        }
+        .datepicker-navbar-btn {
+            color: var(--dark-theme);
+        }
+    }
+
+    /* ios */
+    &.ios {
+        background-color: var(--ios-bg);
+        .datepicker-col-1 {margin: 0}
+        .datepicker-viewport {
+            &::after {
+                background: linear-gradient(#f7f7f7,rgba(245,245,245,0)52%,rgba(245,245,245,0)48%,#f7f7f7);
+            }
+        }
+        .datepicker-wheel {
+            border-top: 1px solid var(--ios-theme);
+            border-bottom: 1px solid var(--ios-theme);
+        }
+        .datepicker-scroll {
+            li {
+                color: var(--ios-color);
+            }
+
+            li.disabled {
+                color: var(--ios-disabled-color);
+            }
+        }
+
+        .datepicker-navbar {
             position: absolute;
             top: 0;
             left: 0;
-            font-size: 1.5em;
             width: 100%;
-            line-height: 35px;
+            padding: 0;
+            border-bottom: 1px solid #acacac;
+        }
+        .datepicker-navbar-btn {
+            color: #007aff;
+            &:nth-child(2) {
+                float: left;
+            }
+        }
+
+        .datepicker-content {
+            padding-top: 48px;
+        }
+    }
+
+
+    /* android */
+
+    &.android, &.android-dark {
+        height: 294px;
+        background-color: var(--android-bg);
+
+        .datepicker-header {
+            color: var(--android-theme);
+            border-bottom: 2px solid var(--android-theme);
+            display: block;
+        }
+        .datepicker-col-1 {margin: 0 .625em}
+        .datepicker-viewport {
+            &::after {
+                background-image: linear-gradient(#f5f5f5,rgba(245,245,245,0)52%,rgba(245,245,245,0)48%,#f5f5f5);
+            }
+        }
+        .datepicker-wheel {
+            border-top: 2px solid var(--android-theme);
+            border-bottom: 2px solid var(--android-theme);
+        }
+
+        .datepicker-scroll {
+            li {
+                font-size: 1.125em;
+                color: var(--android-color);
+            }
+
+            li.disabled {
+                color: var(--android-disabled-color);
+            }
+        }
+
+        .datepicker-navbar {
+            display: flex;
+            border-top: 1px solid #d9d4d4;
+            padding: 0;
+        }
+        .datepicker-navbar-btn {
+            padding: 0;
+            color: #000;
+            flex: 1;
+            &:nth-child(2) {
+                border-left: 1px solid #d9d4d4;
+            }
+        }
+    }
+
+    /* android-dark */
+    &.android-dark {
+        background-color: var(--android-dark-bg);
+        .datepicker-viewport {
+            &::after {
+                background-image: linear-gradient(#282828,rgba(40,40,40,0)52%,rgba(40,40,40,0)48%,#282828);
+            }
+        }
+        .datepicker-scroll {
+            li {
+                color: var(--android-dark-color);
+            }
+
+            li.disabled {
+                color: var(--android-dark-disabled-color);
+            }
+        }
+        .datepicker-navbar { border-color: #424542}
+        .datepicker-navbar-btn {
+            color: #fff;
+            &:nth-child(2) {
+                border-color: #424542;
+            }
         }
     }
 }

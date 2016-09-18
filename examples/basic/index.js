@@ -2,29 +2,25 @@ import './main.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { convertDate } from '../../lib/time.js';
-import DatePicker from '../../lib/index';
-// import DatePicker from '../../dist/react-mobile-datepicker.js';
+// import DatePicker from '../../lib/index';
+import DatePicker from '../../dist/react-mobile-datepicker.js';
+
+window.Perf = require('react-addons-perf');
 
 (function main() {
-    const BACKGROUNDS = {
-        'yellow': '#ffa70b',
-        'blue': '#0483bc',
-        'black': '#333',
-    };
-
     class App extends React.Component {
         state = {
             time: new Date(),
             isOpen: false,
-            layerBackground: BACKGROUNDS.yellow,
+            theme: 'default',
         }
 
-        handleClick = () => {
-            this.setState({ isOpen: true });
+        handleToggle = (isOpen) => () => {
+            this.setState({ isOpen });
         }
 
-        handleBackgroundClick = (background) => () => {
-            this.setState({ layerBackground: BACKGROUNDS[background] });
+        handleThemeToggle = (theme) => () => {
+            this.setState({ theme, isOpen: true });
         }
 
         handleSelect = (time) => {
@@ -34,39 +30,42 @@ import DatePicker from '../../lib/index';
         render() {
             return (
                 <div className="App">
-                    <a
-                        className="select-btn"
-                        onClick={this.handleClick}>
-                        select time
-                    </a>
                     <p className="select-time ">
                         {convertDate(this.state.time, 'YYYY-MM-DD')}
                     </p>
                     <div>
                         <a
                             className="select-btn sm"
-                            style={{ background: BACKGROUNDS.yellow }}
-                            onClick={this.handleBackgroundClick('yellow')}>
-                            yellow
+                            onClick={this.handleThemeToggle('default')}>
+                            default
                         </a>
                         <a
                             className="select-btn sm"
-                            style={{ background: BACKGROUNDS.blue }}
-                            onClick={this.handleBackgroundClick('blue')}>
-                            blue
+                            onClick={this.handleThemeToggle('dark')}>
+                            dark
                         </a>
                         <a
                             className="select-btn sm"
-                            style={{ background: BACKGROUNDS.black }}
-                            onClick={this.handleBackgroundClick('black')}>
-                            black
+                            onClick={this.handleThemeToggle('ios')}>
+                            ios
+                        </a>
+                        <a
+                            className="select-btn sm"
+                            onClick={this.handleThemeToggle('android')}>
+                            android
+                        </a>
+                        <a
+                            className="select-btn sm"
+                            onClick={this.handleThemeToggle('android-dark')}>
+                            android-dark
                         </a>
                     </div>
                     <DatePicker
-                        layerBackground={this.state.layerBackground}
-                        date={this.state.time}
+                        value={this.state.time}
+                        theme={this.state.theme}
                         isOpen={this.state.isOpen}
-                        onSelect={this.handleSelect} />
+                        onSelect={this.handleSelect}
+                        onCancel={this.handleToggle(false)} />
                 </div>
             );
         }

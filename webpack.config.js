@@ -41,14 +41,17 @@ module.exports = {
             loader: 'style!css!postcss'
         }]
     },
-    postcss: function() {
+    postcss: function (webpack) {
         return [
-            cssnext({
-                features: {
-                    'browers': ['last 2 version'],
-                },
+            require("postcss-import")({
+                onImport: function (files) {
+                    files.forEach(this.addDependency);
+                }.bind(this),
             }),
-            postNested
+            require("postcss-url")(),
+            require("postcss-cssnext")(),
+            require("postcss-mixins"),
+            require("postcss-nested")(),
         ];
     },
     plugins: [
