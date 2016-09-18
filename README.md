@@ -28,7 +28,7 @@ react-mobile-datepicker provides a component that can set year, month and day by
 
 ### android
 <div style="padding:30px">
-<img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/andriod.png" width="300" />
+<img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/android.png" width="300" />
 </div>
 
 ### android-dark
