@@ -69,9 +69,6 @@ class App extends React.Component {
 					onClick={this.handleClick}>
 					select time
 				</a>
-				<p className="select-time ">
-					{this.state.time}
-				</p>
 
 				<DatePicker
 					value={this.state.time}
