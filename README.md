@@ -13,7 +13,7 @@ react-mobile-datepicker provides a component that can set year, month and day by
 
 
 <div style="padding:30px">
-<img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/preview2.gif" width="300" />
+<img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/preview.gif" width="300" />
 </div>
 
 
