@@ -1,3 +1,10 @@
+[3.0.2](../../releases/tag/3.0.2)     2016-12-18 14:45:39
+---------------------------------------------------------
+
+- [45bcd3e](../../commit/45bcd3e) 🐛  [bug]fix Cannot find module jsdom
+- [a167120](../../commit/a167120) ✨  [feature] Added an option (isPopup) [(#2)](https://github.com/lanjingling0510/react-mobile-datepicker/issues/2)
+
+
 v3.0.1 - Sun, 18 Sep 2016 09:37:34 GMT
 --------------------------------------
 
