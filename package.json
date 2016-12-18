@@ -53,6 +53,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "gzip-size-cli": "^1.0.0",
     "html-webpack-plugin": "^2.21.0",
+    "jsdom": "^9.8.3",
     "mocha": "2.3.3",
     "mocha-lcov-reporter": "^1.2.0",
     "npm-run-all": "^3.0.0",
