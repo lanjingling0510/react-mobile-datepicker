@@ -106,6 +106,7 @@ ReactDOM.render(<App />, document.getElementById('react-box'));
 
 | Property        | Type           | Default  | Description |
 |:------------- |:------------- |:-------------- |:---------- |
+| isPopup      | Boolean | true | whether  as popup add a overlay |
 | isOpen      | Boolean | false | whether to open datepicker |
 | theme      | String      | default  | theme of datepicker, include 'default', 'dark', 'ios', 'android', 'android-dark' |
 | dateFormat | Array     | ['YYYY', 'M', 'D'] | according to year, month, day format specified display text. E.g ['YYYY年', 'MM月', 'DD日']|
