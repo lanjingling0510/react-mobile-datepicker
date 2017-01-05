@@ -1,3 +1,9 @@
+[3.0.3](../../releases/tag/3.0.3)     2017-01-05 15:06:48
+---------------------------------------------------------
+
+- [61d569f](../../commit/61d569f) ✨  [feature] Support server rendering (https://github.com/lanjingling0510/react-mobile-datepicker/issues/4)
+
+
 [3.0.2](../../releases/tag/3.0.2)     2016-12-18 14:45:39
 ---------------------------------------------------------
 
