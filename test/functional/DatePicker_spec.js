@@ -24,6 +24,17 @@ function delay(time) {
 }
 
 describe('DatePicker.js', () => {
+
+    describe('Lifecycle', () => {
+        it ('should update value of state when parent component value of props update', () => {
+            const datePicker = mount(
+                <DatePicker {...DEFAULT_PROPS} />
+            );
+            datePicker.setProps({ value: new Date(2016, 8, 15) });
+            expect(datePicker.state('value').getTime()).to.equals(new Date(2016, 8, 15).getTime());
+        });
+    });
+
     describe('logic', () => {
         var datePicker;
         var yearPicker;
