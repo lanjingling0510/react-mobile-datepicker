@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import { mount, shallow } from 'enzyme';
 import DatePickerItem from '../../lib/DatePickerItem';
 import {getTime, nextDate} from '../../lib/time';
-
+import eventTrigger from '../event_helper.js';
 
 const DEFAULT_PROPS = {
     value: new Date(2010, 3, 7),
@@ -69,21 +69,21 @@ describe('DatePickerItem.js', () => {
             );
 
             const touchstartEvent = {
-                type: 'touchstart',
                 targetTouches: [{ pageY: 0 }],
             };
             const touchmoveEvent = {
-                type: 'touchmove',
                 targetTouches: [{ pageY: 20 }],
             };
             const touchendEvent = {
-                type: 'touchend',
                 changedTouches: [{ pageY: 50 }],
             };
 
-            datePicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-            datePicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-            datePicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+            const element = datePicker.find('.datepicker-viewport').node;
+
+            eventTrigger(element, 'touchstart',  touchstartEvent);
+            eventTrigger(element, 'touchmove', touchmoveEvent);
+            eventTrigger(element, 'touchend', touchendEvent);
+
             sinon.assert.callCount(spyFunction, 3);
             spyFunction.restore();
         })
@@ -96,30 +96,34 @@ describe('DatePickerItem.js', () => {
                 <DatePickerItem {...DEFAULT_PROPS} typeName="Date" />
             );
             const touchstartEvent = {
-                type: 'touchstart',
                 targetTouches: [{ pageY: 0 }],
             };
             const touchendEvent = {
-                type: 'touchend',
                 changedTouches: [{ pageY: 50 }],
             };
-            datePicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-            datePicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+
+            const element = datePicker.find('.datepicker-viewport').node;
+
+            eventTrigger(element, 'touchstart',  touchstartEvent);
+            eventTrigger(element, 'touchend', touchendEvent);
+
             expect(spyFunction.getCall(0).args[0]).to.equal(-1);
 
             const datePicker2 = mount(
                 <DatePickerItem {...DEFAULT_PROPS} typeName="Date" />
             );
             const touchstartEvent2 = {
-                type: 'touchstart',
                 targetTouches: [{ pageY: 0 }],
             };
             const touchendEvent2 = {
-                type: 'touchend',
                 changedTouches: [{ pageY: -50 }],
             };
-            datePicker2.find('.datepicker-viewport').simulate('touchStart', touchstartEvent2);
-            datePicker2.find('.datepicker-viewport').simulate('touchEnd', touchendEvent2);
+
+            const element2 = datePicker2.find('.datepicker-viewport').node;
+
+            eventTrigger(element2, 'touchstart',  touchstartEvent2);
+            eventTrigger(element2, 'touchend', touchendEvent2);
+
             expect(spyFunction.getCall(1).args[0]).to.equal(1);
             spyFunction.restore();
         })
@@ -131,15 +135,17 @@ describe('DatePickerItem.js', () => {
                 <DatePickerItem {...DEFAULT_PROPS} typeName="Date" />
             );
             const touchstartEvent = {
-                type: 'touchstart',
                 targetTouches: [{ pageY: 0 }],
             };
             const touchendEvent = {
-                type: 'touchmove',
                 targetTouches: [{ pageY: 21 }],
             };
-            datePicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-            datePicker.find('.datepicker-viewport').simulate('touchMove', touchendEvent);
+
+            const element = datePicker.find('.datepicker-viewport').node;
+
+            eventTrigger(element, 'touchstart',  touchstartEvent);
+            eventTrigger(element, 'touchmove', touchendEvent);
+
             sinon.assert.calledOnce(spyFunction);
             spyFunction.restore();
         })
@@ -159,15 +165,16 @@ describe('DatePickerItem.js', () => {
             );
 
             const touchstartEvent = {
-                type: 'touchstart',
                 targetTouches: [{ pageY: 0 }],
             };
             const touchendEvent = {
-                type: 'touchend',
                 changedTouches: [{ pageY: -21 }],
             };
-            datePicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-            datePicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+
+            const element = datePicker.find('.datepicker-viewport').node;
+
+            eventTrigger(element, 'touchstart',  touchstartEvent);
+            eventTrigger(element, 'touchend', touchendEvent);
 
             expect(spyFunction.getCall(0).args[1]).to.equal(5);
         })

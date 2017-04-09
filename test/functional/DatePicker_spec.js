@@ -6,6 +6,7 @@ import { mount, shallow } from 'enzyme';
 import DatePicker from '../../lib/DatePicker';
 import DatePickerItem from '../../lib/DatePickerItem';
 import {getTime, nextDate} from '../../lib/time';
+import eventTrigger from '../event_helper.js';
 
 const DEFAULT_PROPS = {
     value: new Date(2016, 8, 16),
@@ -52,50 +53,66 @@ describe('DatePicker.js', () => {
 
         it ('should update correct value of state, when slide to next year, month, date', () => {
             const touchstartEvent = {
-                type: 'touchstart',
                 targetTouches: [{ pageY: 0 }],
             };
             const touchmoveEvent = {
-                type: 'touchmove',
                 targetTouches: [{ pageY: -21 }],
             };
             const touchendEvent = {
-                type: 'touchend',
                 changedTouches: [{ pageY: -21 }],
             };
 
-            yearPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-            yearPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-            yearPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+            const year = yearPicker.find('.datepicker-viewport').node;
+
+            eventTrigger(year, 'touchstart',  touchstartEvent);
+            eventTrigger(year, 'touchmove', touchmoveEvent);
+            eventTrigger(year, 'touchend', touchendEvent);
+
             return delay(250)
             .then(() => {
                 expect(datePicker.state('value').getTime()).to.equals(new Date(2017, 8, 16).getTime());
-                monthPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-                monthPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-                monthPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+
+                const month = monthPicker.find('.datepicker-viewport').node;
+
+                eventTrigger(month, 'touchstart',  touchstartEvent);
+                eventTrigger(month, 'touchmove', touchmoveEvent);
+                eventTrigger(month, 'touchend', touchendEvent);
+
                 return delay(250);
             })
             .then(() => {
                 expect(datePicker.state('value').getTime()).to.equals(new Date(2017, 9, 16).getTime());
-                dayPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-                dayPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-                dayPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+
+                const day = dayPicker.find('.datepicker-viewport').node;
+
+                eventTrigger(day, 'touchstart',  touchstartEvent);
+                eventTrigger(day, 'touchmove', touchmoveEvent);
+                eventTrigger(day, 'touchend', touchendEvent);
+
                 return delay(250);
             })
             .then(() => {
                 expect(datePicker.state('value').getTime()).to.equals(new Date(2017, 9, 17).getTime());
                 // Special case
                 datePicker.setState({value: new Date(2016, 9, 31)});
-                monthPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-                monthPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-                monthPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+
+                const month = monthPicker.find('.datepicker-viewport').node;
+
+                eventTrigger(month, 'touchstart',  touchstartEvent);
+                eventTrigger(month, 'touchmove', touchmoveEvent);
+                eventTrigger(month, 'touchend', touchendEvent);
+
                 return delay(250);
             })
             .then(() => {
                 expect(datePicker.state('value').getTime()).to.equals(new Date(2016, 10, 30).getTime());
-                dayPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-                dayPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-                dayPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+
+                const day = dayPicker.find('.datepicker-viewport').node;
+
+                eventTrigger(day, 'touchstart',  touchstartEvent);
+                eventTrigger(day, 'touchmove', touchmoveEvent);
+                eventTrigger(day, 'touchend', touchendEvent);
+
                 return delay(250);
             })
             .then(() => {
@@ -107,45 +124,57 @@ describe('DatePicker.js', () => {
 
         it ('should update correct value of state, when slide to last year, month, date', () => {
             const touchstartEvent = {
-                type: 'touchstart',
                 targetTouches: [{ pageY: 0 }],
             };
             const touchmoveEvent = {
-                type: 'touchmove',
                 targetTouches: [{ pageY: 21 }],
             };
             const touchendEvent = {
-                type: 'touchend',
                 changedTouches: [{ pageY: 21 }],
             };
 
             datePicker.setState({value: new Date(2016, 8, 16)});
 
-            yearPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-            yearPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-            yearPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+            const year = yearPicker.find('.datepicker-viewport').node;
+
+            eventTrigger(year, 'touchstart',  touchstartEvent);
+            eventTrigger(year, 'touchmove', touchmoveEvent);
+            eventTrigger(year, 'touchend', touchendEvent);
+
             return delay(250)
             .then(() => {
                 expect(datePicker.state('value').getTime()).to.equals(new Date(2016, 8, 16).getTime());
-                monthPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-                monthPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-                monthPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+
+                const month = monthPicker.find('.datepicker-viewport').node;
+
+                eventTrigger(month, 'touchstart',  touchstartEvent);
+                eventTrigger(month, 'touchmove', touchmoveEvent);
+                eventTrigger(month, 'touchend', touchendEvent);
+
                 return delay(250);
             })
             .then(() => {
                 expect(datePicker.state('value').getTime()).to.equals(new Date(2016, 7, 16).getTime());
-                dayPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-                dayPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-                dayPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+
+                const day = dayPicker.find('.datepicker-viewport').node;
+
+                eventTrigger(day, 'touchstart',  touchstartEvent);
+                eventTrigger(day, 'touchmove', touchmoveEvent);
+                eventTrigger(day, 'touchend', touchendEvent);
+
                 return delay(250);
             })
             .then(() => {
                 expect(datePicker.state('value').getTime()).to.equals(new Date(2016, 7, 15).getTime());
                 // Special case
                 datePicker.setState({value: new Date(2016, 10, 30)});
-                monthPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-                monthPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-                monthPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+
+                const month = monthPicker.find('.datepicker-viewport').node;
+
+                eventTrigger(month, 'touchstart',  touchstartEvent);
+                eventTrigger(month, 'touchmove', touchmoveEvent);
+                eventTrigger(month, 'touchend', touchendEvent);
+
                 return delay(250);
             })
             .then(() => {
@@ -157,35 +186,37 @@ describe('DatePicker.js', () => {
         it('should not update value of state, when less than the minimum', () => {
             datePicker.setState({value: new Date(2016, 11, 2)});
             const touchstartEvent = {
-                type: 'touchstart',
                 targetTouches: [{ pageY: 0 }],
             };
             const touchmoveEvent = {
-                type: 'touchmove',
                 targetTouches: [{ pageY: 50 }],
             };
             const touchendEvent = {
-                type: 'touchend',
                 changedTouches: [{ pageY: 50 }],
             };
 
 
-            yearPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-            yearPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-            yearPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+            const year = yearPicker.find('.datepicker-viewport').node;
 
+            eventTrigger(year, 'touchstart',  touchstartEvent);
+            eventTrigger(year, 'touchmove', touchmoveEvent);
+            eventTrigger(year, 'touchend', touchendEvent);
 
             return delay(250)
             .then(() => {
-                monthPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-                monthPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-                monthPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+                const month = monthPicker.find('.datepicker-viewport').node;
+
+                eventTrigger(month, 'touchstart',  touchstartEvent);
+                eventTrigger(month, 'touchmove', touchmoveEvent);
+                eventTrigger(month, 'touchend', touchendEvent);
                 return delay(250);
             })
             .then(() => {
-                dayPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-                dayPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-                dayPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+                const day = dayPicker.find('.datepicker-viewport').node;
+
+                eventTrigger(day, 'touchstart',  touchstartEvent);
+                eventTrigger(day, 'touchmove', touchmoveEvent);
+                eventTrigger(day, 'touchend', touchendEvent);
                 return delay(250);
             })
             .then(() => {
@@ -196,35 +227,36 @@ describe('DatePicker.js', () => {
         it('should not update value of state, when more than the maximum', () => {
             datePicker.setState({value: new Date(2019, 9, 31)});
             const touchstartEvent = {
-                type: 'touchstart',
                 targetTouches: [{ pageY: 0 }],
             };
             const touchmoveEvent = {
-                type: 'touchmove',
                 targetTouches: [{ pageY: -50 }],
             };
             const touchendEvent = {
-                type: 'touchend',
                 changedTouches: [{ pageY: -50 }],
             };
 
+            const year = yearPicker.find('.datepicker-viewport').node;
 
-            yearPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-            yearPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-            yearPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
-
+            eventTrigger(year, 'touchstart',  touchstartEvent);
+            eventTrigger(year, 'touchmove', touchmoveEvent);
+            eventTrigger(year, 'touchend', touchendEvent);
 
             return delay(250)
             .then(() => {
-                monthPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-                monthPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-                monthPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+                const month = monthPicker.find('.datepicker-viewport').node;
+
+                eventTrigger(month, 'touchstart',  touchstartEvent);
+                eventTrigger(month, 'touchmove', touchmoveEvent);
+                eventTrigger(month, 'touchend', touchendEvent);
                 return delay(250);
             })
             .then(() => {
-                dayPicker.find('.datepicker-viewport').simulate('touchStart', touchstartEvent);
-                dayPicker.find('.datepicker-viewport').simulate('touchMove', touchmoveEvent);
-                dayPicker.find('.datepicker-viewport').simulate('touchEnd', touchendEvent);
+                const day = dayPicker.find('.datepicker-viewport').node;
+
+                eventTrigger(day, 'touchstart',  touchstartEvent);
+                eventTrigger(day, 'touchmove', touchmoveEvent);
+                eventTrigger(day, 'touchend', touchendEvent);
                 return delay(250);
             })
             .then(() => {
