@@ -1,3 +1,11 @@
+[3.0.5](../../releases/tag/3.0.5)     2017-07-03 20:47:51
+---------------------------------------------------------
+
+- [cec3c8a](../../commit/cec3c8a) ✨  [feature] add feature of button customized.(https://github.com/lanjingling0510/react-mobile-datepicker/issues/3)
+- [49d2fc7](../../commit/49d2fc7) 🐛  [bug]fix android4.4 TouchEvent has PageY propery (https://github.com/lanjingling0510/react-mobile-datepicker/issues/9)
+- [436906c](../../commit/436906c) 📚  [document] edit LICENSE.md fullname.
+
+
 [3.0.4](../../releases/tag/3.0.4)     2017-04-09 17:12:18
 ---------------------------------------------------------
 
