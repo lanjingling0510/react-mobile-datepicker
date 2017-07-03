@@ -113,6 +113,8 @@ ReactDOM.render(<App />, document.getElementById('react-box'));
 | value | Date | new Date() | date value |
 | min  | Date | new Date(1970, 0, 1) | minimum date |
 | max | Date | new Date(2050, 0, 1) | maximum date |
+| confirmText  | String | 完成 | customize the selection time button text |
+| cancelText | String | 取消 | customize the cancel button text |
 | onSelect | Function | () => {} | the callback function after click button of done, Date object as a parameter |
 | onCancel | Function | () => {} | the callback function after click button of cancel |
 
