@@ -1,3 +1,10 @@
+[3.0.6](../../releases/tag/3.0.6)     2017-07-08 20:21:30
+---------------------------------------------------------
+
+- [1d847d8](../../commit/1d847d8) 📚  [document] edit readme document.
+- [d2c3372](../../commit/d2c3372) ✨  [feature] Add characteristics of automatic configuration Year, Month, Day, Hour, Minute, Second.
+
+
 [3.0.5](../../releases/tag/3.0.5)     2017-07-03 20:47:51
 ---------------------------------------------------------
 
