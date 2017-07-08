@@ -10,7 +10,8 @@ react-mobile-datepicker provides a component that can set year, month and day by
 - is only 4k.
 - It does not depend on moment.js
 
-## Screenshots
+## Theme
+
 ### default
 <div style="padding:30px">
 <img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/default.png" width="300" />
@@ -35,6 +36,22 @@ react-mobile-datepicker provides a component that can set year, month and day by
 <div style="padding:30px">
 <img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/android-dark.png" width="300" />
 </div>
+
+## Custom date unit
+
+set dateFormat for `['YYYY', 'MM', 'DD', 'hh', 'mm']` to configure year, month, day, hour, minute.
+
+<div style="padding:30px">
+<img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/year-month-day-hour-minute.png" width="300" />
+</div>
+
+
+set dateFormat for `['hh', 'mm', 'ss']` to configure hour, minute and second.
+
+<div style="padding:30px">
+<img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/hour-minute-second.png" width="300" />
+</div>
+
 
 ## Getting Started
 
@@ -109,7 +126,8 @@ ReactDOM.render(<App />, document.getElementById('react-box'));
 | isPopup      | Boolean | true | whether  as popup add a overlay |
 | isOpen      | Boolean | false | whether to open datepicker |
 | theme      | String      | default  | theme of datepicker, include 'default', 'dark', 'ios', 'android', 'android-dark' |
-| dateFormat | Array     | ['YYYY', 'M', 'D'] | according to year, month, day format specified display text. E.g ['YYYY年', 'MM月', 'DD日']|
+| dateFormat | Array     | ['YYYY', 'M', 'D'] | according to year, month, day, hour, minute, second format specified display text. E.g ['YYYY年', 'MM月', 'DD日']|
+|showFormat | String | 'YYYY/MM/DD' | customize the format of the display title |
 | value | Date | new Date() | date value |
 | min  | Date | new Date(1970, 0, 1) | minimum date |
 | max | Date | new Date(2050, 0, 1) | maximum date |
