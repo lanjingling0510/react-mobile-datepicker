@@ -4,7 +4,7 @@
 
 **a  lightweight react date picker for mobile, Not more than 4k**
 
-react-mobile-datepicker provides a component that can set year, month and day by sliding up or down.
+react-mobile-datepicker provides a component that can set year, month, day, hour, minute and second by sliding up or down.
 
 ## Features
 - is only 4k.
