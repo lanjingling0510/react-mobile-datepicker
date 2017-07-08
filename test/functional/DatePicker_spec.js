@@ -265,3 +265,55 @@ describe('DatePicker.js', () => {
         })
     });
 });
+
+describe('渲染正确的DatepicketItem子组件', () => {
+    let props;
+    let mountedDatepicker;
+
+    const datePicker = () => {
+        if (!mountedDatepicker) {
+            mountedDatepicker = mount(
+                <DatePicker {...props} />
+            );
+        }
+
+        return mountedDatepicker;
+    }
+
+    beforeEach(() => {
+        props = {
+            value: new Date(2016, 8, 16),
+        };
+        mountedDatepicker = undefined;
+    });
+
+    it('当dateFormat等于[YYYY, MM, DD]', () => {
+        props.dateFormat = ['YYYY', 'MM', 'DD'];
+        const datePickerItems = datePicker().find(DatePickerItem);
+        expect(datePickerItems.length).to.equals(3);
+        expect(datePickerItems.at(0).props().format).to.equals('YYYY');
+        expect(datePickerItems.at(1).props().format).to.equals('MM');
+        expect(datePickerItems.at(2).props().format).to.equals('DD');
+    });
+
+    it('当dateFormat等于[YYYY, MM, DD, hh, mm, ss]', () => {
+        props.dateFormat = ['YYYY', 'MM', 'DD', 'hh', 'mm', 'ss'];
+        const datePickerItems = datePicker().find(DatePickerItem);
+        expect(datePickerItems.length).to.equals(6);
+        expect(datePickerItems.at(0).props().format).to.equals('YYYY');
+        expect(datePickerItems.at(1).props().format).to.equals('MM');
+        expect(datePickerItems.at(2).props().format).to.equals('DD');
+        expect(datePickerItems.at(3).props().format).to.equals('hh');
+        expect(datePickerItems.at(4).props().format).to.equals('mm');
+        expect(datePickerItems.at(5).props().format).to.equals('ss');
+    });
+
+    it('当dateFormat等于[hh, mm, ss]', () => {
+        props.dateFormat = ['hh', 'mm', 'ss'];
+        const datePickerItems = datePicker().find(DatePickerItem);
+        expect(datePickerItems.length).to.equals(3);
+        expect(datePickerItems.at(0).props().format).to.equals('hh');
+        expect(datePickerItems.at(1).props().format).to.equals('mm');
+        expect(datePickerItems.at(2).props().format).to.equals('ss');
+    });
+});

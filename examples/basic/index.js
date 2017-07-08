@@ -61,6 +61,8 @@ window.Perf = require('react-addons-perf');
                         </a>
                     </div>
                     <DatePicker
+                        dateFormat={['hh', 'mm', 'ss']}
+                        showFormat="hh时:mm分:ss秒"
                         value={this.state.time}
                         theme={this.state.theme}
                         isOpen={this.state.isOpen}
