@@ -27,10 +27,14 @@
     "preview-release": "scripts/preview-release",
     "mocha": "./node_modules/.bin/mocha --compilers js:babel-core/register --require ./test/helper.js --recursive",
     "test": "./node_modules/.bin/nyc npm run mocha",
-    "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
+    "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "rainie",
   "devDependencies": {
+    "@storybook/addon-info": "^3.1.9",
+    "@storybook/react": "^3.1.9",
     "autoprefixer": "^6.3.6",
     "babel-core": "^6.9.0",
     "babel-eslint": "^6.0.4",
@@ -58,13 +62,13 @@
     "mocha-lcov-reporter": "^1.2.0",
     "npm-run-all": "^3.0.0",
     "nyc": "^6.6.1",
-    "postcss": "^5.1.2",
-    "postcss-cssnext": "^2.8.0",
-    "postcss-import": "^8.1.2",
-    "postcss-loader": "^0.10.1",
-    "postcss-mixins": "^5.2.0",
-    "postcss-nested": "^1.0.0",
-    "postcss-url": "^5.1.2",
+    "postcss": "^6.0.7",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-import": "^10.0.0",
+    "postcss-loader": "^2.0.6",
+    "postcss-mixins": "^6.0.1",
+    "postcss-nested": "^2.0.4",
+    "postcss-url": "^7.0.0",
     "pretty-bytes-cli": "^2.0.0",
     "react": "^15.3.1",
     "react-addons-perf": "^15.3.1",
@@ -79,8 +83,8 @@
     "sinon": "^1.17.4",
     "style-loader": "^0.13.1",
     "uglify-js": "^2.7.3",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^3.3.0",
+    "webpack-dev-server": "^2.5.1"
   },
   "license": "ISC"
 }

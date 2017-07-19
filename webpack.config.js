@@ -1,4 +1,3 @@
-
 /* eslint-disable */
 var path = require('path');
 var fs = require('fs');
@@ -10,66 +9,76 @@ var cssnext = require('cssnext');
 
 var TARGET = process.env.npm_lifecycle_event;
 var EXAMPLES_DIR = path.resolve(__dirname, 'examples');
-
+const ROOT_PATH = process.cwd();
 
 module.exports = {
     entry: buildEntries(),
     output: {
-        path: 'examples/__build__',
+        path: ROOT_PATH + '/xamples/__build__',
         publicPath: '/',
         filename: '[name].js',
-        chunkFilename: "[name].chunk.min.js"
+        chunkFilename: '[name].chunk.min.js',
     },
-    devTool: 'eval-source-map',
+    devtool: 'eval-source-map',
     devServer: {
         historyApiFallback: true,
         hot: true,
         inline: true,
-        progress: true,
         host: '0.0.0.0',
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.json', '.js', '.jsx', '.css'],
     },
+
+    resolveLoader: {
+        moduleExtensions: ['-loader'],
+    },
+
+    performance: {
+        hints: false,
+    },
+
     module: {
-        loaders: [{
-            test: /\.jsx?$/,
-            loaders: ['babel'],
-            exclude: /node_modules/,
-        }, {
-            test: /\.css$/,
-            loader: 'style!css!postcss'
-        }]
-    },
-    postcss: function (webpack) {
-        return [
-            require("postcss-import")({
-                onImport: function (files) {
-                    files.forEach(this.addDependency);
-                }.bind(this),
-            }),
-            require("postcss-url")(),
-            require("postcss-cssnext")(),
-            require("postcss-mixins"),
-            require("postcss-nested")(),
-        ];
+        rules: [
+            {
+                test: /\.jsx?$/,
+                loader: 'babel',
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.css$/,
+                use: [
+                  {loader: 'style'},
+                  {loader: 'css'},
+                  {
+                    loader: 'postcss',
+                    options: {config: {path: path.join(__dirname, 'postcss.config.js')}},
+                  },
+                ],
+            },
+        ],
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'lib-temlate',
             template: 'examples/index.html', // Load a custom template
-            inject: 'body' // Inject all scripts into the body
+            inject: 'body', // Inject all scripts into the body
         }),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': '"development"'
+            'process.env.NODE_ENV': '"development"',
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
-    ]
+        new webpack.optimize.CommonsChunkPlugin({
+            name: [
+                'vendor',
+            ], // vendor libs + extracted manifest
+            minChunks: Infinity
+        }),
+    ],
 };
 
 function buildEntries() {
-    return fs.readdirSync(EXAMPLES_DIR).reduce(function (a, b) {
+    return fs.readdirSync(EXAMPLES_DIR).reduce(function(a, b) {
         if (b === '__build__') {
             return a;
         }
@@ -84,7 +93,6 @@ function buildEntries() {
     }, {});
 }
 
-
 function isDirectory(dir) {
-  return fs.lstatSync(dir).isDirectory();
+    return fs.lstatSync(dir).isDirectory();
 }
