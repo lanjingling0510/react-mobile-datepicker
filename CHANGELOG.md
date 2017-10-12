@@ -1,3 +1,12 @@
+[3.0.7](../../releases/tag/3.0.7)     2017-10-12 08:11:11
+---------------------------------------------------------
+
+- [9155be0](../../commit/9155be0) ✨  [feature] update some depend packages(https://github.com/lanjingling0510/react-mobile-datepicker/issues/15)
+- [1feaa24](../../commit/1feaa24) 🔧  [config] add react storybook.
+- [81dd701](../../commit/81dd701) 🔧  [config] add package-lock.json file.
+- [e925080](../../commit/e925080) 📚  [document] edit readme document.
+
+
 [3.0.6](../../releases/tag/3.0.6)     2017-07-08 20:21:30
 ---------------------------------------------------------
 
