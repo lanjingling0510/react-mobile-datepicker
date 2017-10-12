@@ -14,7 +14,7 @@ const ROOT_PATH = process.cwd();
 module.exports = {
     entry: buildEntries(),
     output: {
-        path: ROOT_PATH + '/xamples/__build__',
+        path: ROOT_PATH + '/examples/__build__',
         publicPath: '/',
         filename: '[name].js',
         chunkFilename: '[name].chunk.min.js',

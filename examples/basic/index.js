@@ -3,9 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { convertDate } from '../../lib/time.js';
 import DatePicker from '../../lib/index';
-// import DatePicker from '../../dist/react-mobile-datepicker.js';
-
-window.Perf = require('react-addons-perf');
 
 (function main() {
     class App extends React.Component {
@@ -61,9 +58,8 @@ window.Perf = require('react-addons-perf');
                         </a>
                     </div>
                     <DatePicker
-                        dateFormat={['hh', 'mm', 'ss']}
-                        showFormat="hh:mm:ss"
                         value={this.state.time}
+                        min={new Date(2017, 2, 2)}
                         theme={this.state.theme}
                         isOpen={this.state.isOpen}
                         onSelect={this.handleSelect}

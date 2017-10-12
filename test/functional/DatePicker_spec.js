@@ -2,11 +2,14 @@
 import React from 'react';
 import { assert, expect } from 'chai';
 import sinon from 'sinon';
-import { mount, shallow } from 'enzyme';
+import { mount, shallow, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
 import DatePicker from '../../lib/DatePicker';
 import DatePickerItem from '../../lib/DatePickerItem';
 import {getTime, nextDate} from '../../lib/time';
 import eventTrigger from '../event_helper.js';
+
+configure({ adapter: new Adapter() });
 
 const DEFAULT_PROPS = {
     value: new Date(2016, 8, 16),
@@ -62,7 +65,7 @@ describe('DatePicker.js', () => {
                 changedTouches: [{ pageY: -21 }],
             };
 
-            const year = yearPicker.find('.datepicker-viewport').node;
+            const year = yearPicker.find('.datepicker-viewport').instance();
 
             eventTrigger(year, 'touchstart',  touchstartEvent);
             eventTrigger(year, 'touchmove', touchmoveEvent);
@@ -72,7 +75,7 @@ describe('DatePicker.js', () => {
             .then(() => {
                 expect(datePicker.state('value').getTime()).to.equals(new Date(2017, 8, 16).getTime());
 
-                const month = monthPicker.find('.datepicker-viewport').node;
+                const month = monthPicker.find('.datepicker-viewport').instance();
 
                 eventTrigger(month, 'touchstart',  touchstartEvent);
                 eventTrigger(month, 'touchmove', touchmoveEvent);
@@ -83,7 +86,7 @@ describe('DatePicker.js', () => {
             .then(() => {
                 expect(datePicker.state('value').getTime()).to.equals(new Date(2017, 9, 16).getTime());
 
-                const day = dayPicker.find('.datepicker-viewport').node;
+                const day = dayPicker.find('.datepicker-viewport').instance();
 
                 eventTrigger(day, 'touchstart',  touchstartEvent);
                 eventTrigger(day, 'touchmove', touchmoveEvent);
@@ -96,7 +99,7 @@ describe('DatePicker.js', () => {
                 // Special case
                 datePicker.setState({value: new Date(2016, 9, 31)});
 
-                const month = monthPicker.find('.datepicker-viewport').node;
+                const month = monthPicker.find('.datepicker-viewport').instance();
 
                 eventTrigger(month, 'touchstart',  touchstartEvent);
                 eventTrigger(month, 'touchmove', touchmoveEvent);
@@ -107,7 +110,7 @@ describe('DatePicker.js', () => {
             .then(() => {
                 expect(datePicker.state('value').getTime()).to.equals(new Date(2016, 10, 30).getTime());
 
-                const day = dayPicker.find('.datepicker-viewport').node;
+                const day = dayPicker.find('.datepicker-viewport').instance();
 
                 eventTrigger(day, 'touchstart',  touchstartEvent);
                 eventTrigger(day, 'touchmove', touchmoveEvent);
@@ -135,7 +138,7 @@ describe('DatePicker.js', () => {
 
             datePicker.setState({value: new Date(2016, 8, 16)});
 
-            const year = yearPicker.find('.datepicker-viewport').node;
+            const year = yearPicker.find('.datepicker-viewport').instance();
 
             eventTrigger(year, 'touchstart',  touchstartEvent);
             eventTrigger(year, 'touchmove', touchmoveEvent);
@@ -145,7 +148,7 @@ describe('DatePicker.js', () => {
             .then(() => {
                 expect(datePicker.state('value').getTime()).to.equals(new Date(2016, 8, 16).getTime());
 
-                const month = monthPicker.find('.datepicker-viewport').node;
+                const month = monthPicker.find('.datepicker-viewport').instance();
 
                 eventTrigger(month, 'touchstart',  touchstartEvent);
                 eventTrigger(month, 'touchmove', touchmoveEvent);
@@ -156,7 +159,7 @@ describe('DatePicker.js', () => {
             .then(() => {
                 expect(datePicker.state('value').getTime()).to.equals(new Date(2016, 7, 16).getTime());
 
-                const day = dayPicker.find('.datepicker-viewport').node;
+                const day = dayPicker.find('.datepicker-viewport').instance();
 
                 eventTrigger(day, 'touchstart',  touchstartEvent);
                 eventTrigger(day, 'touchmove', touchmoveEvent);
@@ -169,7 +172,7 @@ describe('DatePicker.js', () => {
                 // Special case
                 datePicker.setState({value: new Date(2016, 10, 30)});
 
-                const month = monthPicker.find('.datepicker-viewport').node;
+                const month = monthPicker.find('.datepicker-viewport').instance();
 
                 eventTrigger(month, 'touchstart',  touchstartEvent);
                 eventTrigger(month, 'touchmove', touchmoveEvent);
@@ -196,7 +199,7 @@ describe('DatePicker.js', () => {
             };
 
 
-            const year = yearPicker.find('.datepicker-viewport').node;
+            const year = yearPicker.find('.datepicker-viewport').instance();
 
             eventTrigger(year, 'touchstart',  touchstartEvent);
             eventTrigger(year, 'touchmove', touchmoveEvent);
@@ -204,7 +207,7 @@ describe('DatePicker.js', () => {
 
             return delay(250)
             .then(() => {
-                const month = monthPicker.find('.datepicker-viewport').node;
+                const month = monthPicker.find('.datepicker-viewport').instance();
 
                 eventTrigger(month, 'touchstart',  touchstartEvent);
                 eventTrigger(month, 'touchmove', touchmoveEvent);
@@ -212,7 +215,7 @@ describe('DatePicker.js', () => {
                 return delay(250);
             })
             .then(() => {
-                const day = dayPicker.find('.datepicker-viewport').node;
+                const day = dayPicker.find('.datepicker-viewport').instance();
 
                 eventTrigger(day, 'touchstart',  touchstartEvent);
                 eventTrigger(day, 'touchmove', touchmoveEvent);
@@ -236,7 +239,7 @@ describe('DatePicker.js', () => {
                 changedTouches: [{ pageY: -50 }],
             };
 
-            const year = yearPicker.find('.datepicker-viewport').node;
+            const year = yearPicker.find('.datepicker-viewport').instance();
 
             eventTrigger(year, 'touchstart',  touchstartEvent);
             eventTrigger(year, 'touchmove', touchmoveEvent);
@@ -244,7 +247,7 @@ describe('DatePicker.js', () => {
 
             return delay(250)
             .then(() => {
-                const month = monthPicker.find('.datepicker-viewport').node;
+                const month = monthPicker.find('.datepicker-viewport').instance();
 
                 eventTrigger(month, 'touchstart',  touchstartEvent);
                 eventTrigger(month, 'touchmove', touchmoveEvent);
@@ -252,7 +255,7 @@ describe('DatePicker.js', () => {
                 return delay(250);
             })
             .then(() => {
-                const day = dayPicker.find('.datepicker-viewport').node;
+                const day = dayPicker.find('.datepicker-viewport').instance();
 
                 eventTrigger(day, 'touchstart',  touchstartEvent);
                 eventTrigger(day, 'touchmove', touchmoveEvent);

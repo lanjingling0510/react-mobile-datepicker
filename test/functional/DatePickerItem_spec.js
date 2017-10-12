@@ -2,10 +2,13 @@
 import React from 'react';
 import { assert, expect } from 'chai';
 import sinon from 'sinon';
-import { mount, shallow } from 'enzyme';
+import { mount, shallow, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
 import DatePickerItem from '../../lib/DatePickerItem';
 import {getTime, nextDate} from '../../lib/time';
 import eventTrigger from '../event_helper.js';
+
+configure({ adapter: new Adapter() });
 
 const DEFAULT_PROPS = {
     value: new Date(2010, 3, 7),
@@ -77,7 +80,7 @@ describe('DatePickerItem.js', () => {
                 changedTouches: [{ pageY: 50 }],
             };
 
-            const element = datePicker.find('.datepicker-viewport').node;
+            const element = datePicker.find('.datepicker-viewport').instance();
 
             eventTrigger(element, 'touchstart',  touchstartEvent);
             eventTrigger(element, 'touchmove', touchmoveEvent);
@@ -101,7 +104,7 @@ describe('DatePickerItem.js', () => {
                 changedTouches: [{ pageY: 50 }],
             };
 
-            const element = datePicker.find('.datepicker-viewport').node;
+            const element = datePicker.find('.datepicker-viewport').instance();
 
             eventTrigger(element, 'touchstart',  touchstartEvent);
             eventTrigger(element, 'touchend', touchendEvent);
@@ -118,7 +121,7 @@ describe('DatePickerItem.js', () => {
                 changedTouches: [{ pageY: -50 }],
             };
 
-            const element2 = datePicker2.find('.datepicker-viewport').node;
+            const element2 = datePicker2.find('.datepicker-viewport').instance();
 
             eventTrigger(element2, 'touchstart',  touchstartEvent2);
             eventTrigger(element2, 'touchend', touchendEvent2);
@@ -140,7 +143,7 @@ describe('DatePickerItem.js', () => {
                 targetTouches: [{ pageY: 21 }],
             };
 
-            const element = datePicker.find('.datepicker-viewport').node;
+            const element = datePicker.find('.datepicker-viewport').instance();
 
             eventTrigger(element, 'touchstart',  touchstartEvent);
             eventTrigger(element, 'touchmove', touchendEvent);
@@ -170,7 +173,7 @@ describe('DatePickerItem.js', () => {
                 changedTouches: [{ pageY: -21 }],
             };
 
-            const element = datePicker.find('.datepicker-viewport').node;
+            const element = datePicker.find('.datepicker-viewport').instance();
 
             eventTrigger(element, 'touchstart',  touchstartEvent);
             eventTrigger(element, 'touchend', touchendEvent);
