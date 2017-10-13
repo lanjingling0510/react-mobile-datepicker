@@ -203,6 +203,14 @@
         .datepicker-content {
             padding-top: 48px;
         }
+        .title{
+            display: block;
+            width: 100%;
+            margin-top: -2.5em;
+            height: 2.5em;
+            line-height: 2.5em;
+            float: left;
+        }
     }
 
 
@@ -279,4 +287,7 @@
             }
         }
     }
+}
+.title{
+    display: none;
 }
