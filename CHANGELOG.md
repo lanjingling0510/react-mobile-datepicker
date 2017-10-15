@@ -1,3 +1,9 @@
+[3.0.8](../../releases/tag/3.0.8)     2017-10-15 23:17:08
+---------------------------------------------------------
+
+- [3297180](../../commit/3297180) ✨  [feature] Add a function: Customize the header(https://github.com/lanjingling0510/react-mobile-datepicker/pull/16)
+
+
 [3.0.7](../../releases/tag/3.0.7)     2017-10-12 08:11:11
 ---------------------------------------------------------
 
