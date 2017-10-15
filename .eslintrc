@@ -1,28 +1,7 @@
 {
-    "extends": "airbnb",
-    "parser": "babel-eslint",
-    "rules": {
-        "camelcase": 0,
-        "indent": [2, 4, {"SwitchCase": 1}],
-        "no-use-before-define": 0,
-        "no-restricted-syntax": ["error", "WithStatement"],
-        "space-before-function-paren": [2, {"anonymous": "always", "named": "never"}],
-        "no-param-reassign": 0,
-        "func-names": 0,
-        "new-cap": 0,
-        "no-underscore-dangle": 0,
-        "arrow-body-style": 0,
-        "no-console": 0,
-        "no-nested-ternary": 0,
-      "block-scoped-var": 0,
-      "global-require": 0,
-      "no-confusing-arrow": 0,
-      "react/jsx-indent-props": [2, 4],
-      "react/jsx-boolean-value": 0,
-      "react/jsx-indent": [2, 4],
-      "react/jsx-closing-bracket-location": [2, {"location": "after-props"}]
-    },
-    "env": {
-        "jquery": true
-    }
+  "extends": ["cqaso-kit"],
+  "rules": {
+      "flowtype/define-flow-type": 1,
+      "flowtype/use-flow-type": 1
+  }
 }
