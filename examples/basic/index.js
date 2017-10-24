@@ -59,7 +59,10 @@ import DatePicker from '../../lib/index';
                     </div>
                     <DatePicker
                         value={this.state.time}
-                        min={new Date(2017, 2, 2)}
+                        customHeader={'服務時間'}
+                        min={new Date(2017, 10, 24)}
+                        max={new Date(2017, 10, 30)}
+                        dateFormat={['YY年','MM月','DD日','hh時','mm分']}
                         theme={this.state.theme}
                         isOpen={this.state.isOpen}
                         onSelect={this.handleSelect}
