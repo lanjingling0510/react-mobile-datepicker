@@ -3,7 +3,6 @@ var path = require('path');
 var fs = require('fs');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var config = require('./config.js');
 var postNested = require('postcss-nested');
 var cssnext = require('cssnext');
 

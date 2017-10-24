@@ -43,7 +43,6 @@
     bottom: 0;
     width: 100%;
     z-index: 1;
-    height: 266px;
     font-size: 16px;
     text-align: center;
     font-family: arial,verdana,sans-serif;
@@ -56,7 +55,6 @@
         min-height: 2em;
         line-height: 2em;
         font-size: 1.125em;
-        display: none;
     }
 
     .datepicker-navbar {
@@ -123,6 +121,10 @@
     /* default */
     &.default {
         background-color: var(--default-bg);
+
+        .datepicker-header {
+            color: var(--default-theme);
+        }
         .datepicker-wheel {
             border-top: 1px solid var(--default-theme);
             border-bottom: 1px solid var(--default-theme);
@@ -144,6 +146,10 @@
     /* dark */
     &.dark {
         background-color: var(--dark-bg);
+
+        .datepicker-header {
+            color: var(--dark-theme);
+        }
         .datepicker-wheel {
             border-top: 1px solid var(--dark-theme);
             border-bottom: 1px solid var(--dark-theme);
@@ -166,6 +172,11 @@
     &.ios {
         background-color: var(--ios-bg);
         .datepicker-col-1 {margin: 0}
+
+        .datepicker-header {
+            color: var(--ios-color);
+            padding: 0 3.5em;
+        }
         .datepicker-viewport {
             &::after {
                 background: linear-gradient(#f7f7f7,rgba(245,245,245,0)52%,rgba(245,245,245,0)48%,#f7f7f7);
@@ -187,6 +198,7 @@
 
         .datepicker-navbar {
             position: absolute;
+            z-index: 2;
             top: 0;
             left: 0;
             width: 100%;
@@ -203,27 +215,20 @@
         .datepicker-content {
             padding-top: 48px;
         }
-        .title{
-            display: block;
-            width: 100%;
-            margin-top: -2.5em;
-            height: 2.5em;
-            line-height: 2.5em;
-            float: left;
+
+        .datepicker-header + .datepicker-content {
+          padding-top: 0;
         }
     }
 
 
     /* android */
-
     &.android, &.android-dark {
-        height: 294px;
         background-color: var(--android-bg);
 
         .datepicker-header {
             color: var(--android-theme);
             border-bottom: 2px solid var(--android-theme);
-            display: block;
         }
         .datepicker-col-1 {margin: 0 .625em}
         .datepicker-viewport {
