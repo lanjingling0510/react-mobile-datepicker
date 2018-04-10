@@ -16,6 +16,7 @@ const DEFAULT_PROPS = {
     min: new Date(2015, 10, 1),
     max: new Date(2020, 10, 1),
     dateFormat: ['YYYY', 'M', 'D'],
+    dateSteps: [1, 1, 1],
     isOpen: true,
 }
 
@@ -286,6 +287,7 @@ describe('渲染正确的DatepicketItem子组件', () => {
     beforeEach(() => {
         props = {
             value: new Date(2016, 8, 16),
+            dateSteps: [1, 1, 1]
         };
         mountedDatepicker = undefined;
     });

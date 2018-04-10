@@ -60,6 +60,7 @@ import DatePicker from '../../lib/index';
                     <DatePicker
                         value={this.state.time}
                         min={new Date(2017, 2, 2)}
+                        dateSteps={[1, 1, 5]}
                         theme={this.state.theme}
                         isOpen={this.state.isOpen}
                         onSelect={this.handleSelect}

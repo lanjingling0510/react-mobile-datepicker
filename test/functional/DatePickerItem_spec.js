@@ -14,6 +14,7 @@ const DEFAULT_PROPS = {
     value: new Date(2010, 3, 7),
     min: new Date(2010, 2, 6),
     max: new Date(2010, 4, 8),
+    step: 1,
     onSelect: () => {},
 }
 
