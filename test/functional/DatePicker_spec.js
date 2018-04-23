@@ -322,3 +322,93 @@ describe('渲染正确的DatepicketItem子组件', () => {
         expect(datePickerItems.at(2).props().format).to.equals('ss');
     });
 });
+
+describe('测试dateSteps属性', () => {
+    let props;
+    let mountedDatepicker;
+    let yearPicker, monthPicker, dayPicker;
+
+    const datePicker = () => {
+        if (!mountedDatepicker) {
+            mountedDatepicker = mount(
+                <DatePicker {...props} />
+            );
+
+            yearPicker = mountedDatepicker.find(DatePickerItem).first();
+            monthPicker = mountedDatepicker.find(DatePickerItem).at(1);
+            dayPicker = mountedDatepicker.find(DatePickerItem).at(2);
+        }
+
+        return mountedDatepicker;
+    }
+
+    beforeEach(() => {
+        props = {
+            value: new Date(2016, 8, 16, 8, 22, 57),
+            min: new Date(2015, 10, 1),
+            max: new Date(2020, 10, 1),
+            isOpen: true,
+        };
+        mountedDatepicker = undefined;
+        yearPicker = null;
+        monthPicker = null;
+        dayPicker = null;
+    });
+
+
+    it ('当datesteps等于[5, 5, 5], dateFormart等于[hh, mm, ss], 当前时间为8:20:57，向上滑动秒，分钟应该为23', () => {
+        props.dateFormat = ['hh', 'mm', 'ss'];
+        props.dateSteps = [1, 1, 5];
+
+        const datePickerItems = datePicker().find(DatePickerItem);
+        const second = dayPicker.find('.datepicker-viewport').instance();
+
+        const touchstartEvent = {
+            targetTouches: [{ pageY: 0 }],
+        };
+        const touchmoveEvent = {
+            targetTouches: [{ pageY: -21 }],
+        };
+        const touchendEvent = {
+            changedTouches: [{ pageY: -21 }],
+        };
+
+        eventTrigger(second, 'touchstart',  touchstartEvent);
+        eventTrigger(second, 'touchmove', touchmoveEvent);
+        eventTrigger(second, 'touchend', touchendEvent);
+
+        return delay(250)
+        .then(() => {
+            expect(mountedDatepicker.state('value').getTime()).to.equals(new Date(2016, 8, 16, 8, 23, 2).getTime());
+        })
+    });
+
+
+    it ('当datesteps等于[5, 5, 5], dateFormart等于[hh, mm, ss], 当前时间为8:20:57，向上滑动秒，最大时间是8:20:59, 分钟应该为22', () => {
+        props.dateFormat = ['hh', 'mm', 'ss'];
+        props.dateSteps = [1, 1, 5];
+        props.max = new Date(2016, 8, 16, 8, 22, 59);
+
+        const datePickerItems = datePicker().find(DatePickerItem);
+        const second = dayPicker.find('.datepicker-viewport').instance();
+
+        const touchstartEvent = {
+            targetTouches: [{ pageY: 0 }],
+        };
+        const touchmoveEvent = {
+            targetTouches: [{ pageY: -21 }],
+        };
+        const touchendEvent = {
+            changedTouches: [{ pageY: -21 }],
+        };
+
+        eventTrigger(second, 'touchstart',  touchstartEvent);
+        eventTrigger(second, 'touchmove', touchmoveEvent);
+        eventTrigger(second, 'touchend', touchendEvent);
+
+        return delay(250)
+        .then(() => {
+            expect(mountedDatepicker.state('value').getTime()).to.equals(new Date(2016, 8, 16, 8, 22, 57).getTime());
+        })
+    });
+});
