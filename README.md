@@ -127,6 +127,7 @@ ReactDOM.render(<App />, document.getElementById('react-box'));
 | isOpen      | Boolean | false | whether to open datepicker |
 | theme      | String      | default  | theme of datepicker, include 'default', 'dark', 'ios', 'android', 'android-dark' |
 | dateFormat | Array     | ['YYYY', 'M', 'D'] | according to year, month, day, hour, minute, second format specified display text. E.g ['YYYY年', 'MM月', 'DD日']|
+| dateSteps | Array | [1, 1, 1] | set step for each time unit |
 |showFormat | String | 'YYYY/MM/DD' | customize the format of the display title |
 | value | Date | new Date() | date value |
 | min  | Date | new Date(1970, 0, 1) | minimum date |

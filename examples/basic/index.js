@@ -7,7 +7,7 @@ import DatePicker from '../../lib/index';
 (function main() {
     class App extends React.Component {
         state = {
-            time: new Date(),
+            time: new Date(2016, 8, 16, 8, 20, 57),
             isOpen: false,
             theme: 'default',
         }
@@ -59,8 +59,8 @@ import DatePicker from '../../lib/index';
                     </div>
                     <DatePicker
                         value={this.state.time}
-                        min={new Date(2017, 2, 2)}
                         dateSteps={[1, 1, 5]}
+                        dateFormat={['hh', 'mm', 'ss']}
                         theme={this.state.theme}
                         isOpen={this.state.isOpen}
                         onSelect={this.handleSelect}
