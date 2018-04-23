@@ -1,3 +1,10 @@
+[3.0.9](../../releases/tag/3.0.9)     2018-04-23 10:48:04
+---------------------------------------------------------
+
+- [8508a7e](../../commit/8508a7e) ✨  [feature] add test case for dateSteps
+- [34ff8c6](../../commit/34ff8c6) ✨  [feature] Add characteristics of set a time step
+
+
 [3.0.8](../../releases/tag/3.0.8)     2017-10-15 23:17:08
 ---------------------------------------------------------
 
