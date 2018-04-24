@@ -1,3 +1,10 @@
+[3.0.10](../../releases/tag/3.0.10)     2018-04-24 22:50:29
+-----------------------------------------------------------
+
+- [99ce5da](../../commit/99ce5da) 🐛  [bug]fix the current date is not between the maximum and the minimum date.(https://github.com/lanjingling0510/react-mobile-datepicker/pull/17)
+- [8582c7e](../../commit/8582c7e) ✨  [feature] add test case for dateSteps(https://github.com/lanjingling0510/react-mobile-datepicker/issues/21)
+
+
 [3.0.9](../../releases/tag/3.0.9)     2018-04-23 10:48:04
 ---------------------------------------------------------
 
