@@ -76,7 +76,7 @@ const monthMap = {
 
 ```
 
-<img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/year-custom_month-day" width="300" />
+<img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/year-custom_month-day.png" width="300" />
 </div>
 
 
