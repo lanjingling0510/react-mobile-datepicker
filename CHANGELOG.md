@@ -1,3 +1,9 @@
+[3.0.11](../../releases/tag/3.0.11)     2018-05-12 10:57:46
+-----------------------------------------------------------
+
+- [b6d6b5e](../../commit/b6d6b5e) ✨  [feature] map month number to month name(https://github.com/lanjingling0510/react-mobile-datepicker/issues/26)
+
+
 [3.0.10](../../releases/tag/3.0.10)     2018-04-24 22:50:29
 -----------------------------------------------------------
 
