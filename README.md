@@ -52,6 +52,34 @@ set dateFormat for `['hh', 'mm', 'ss']` to configure hour, minute and second.
 <img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/hour-minute-second.png" width="300" />
 </div>
 
+customize the content mapping shown in the month.
+
+```js
+const monthMap = {
+	'01': 'Jan',
+	'02': 'Feb',
+	'03': 'Mar',
+	'04': 'Apr',
+	'05': 'May',
+	'06': 'Jun',
+	'07': 'Jul',
+	'08': 'Aug',
+	'09': 'Sep',
+	'10': 'Oct',
+	'11': 'Nov',
+	'12': 'Dec',
+};
+
+<DatePicker
+	dateFormat={['YYYY', ['MM', (month) => monthMap[month]], 'DD']}
+/>
+
+```
+
+<img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/year-custom_month-day" width="300" />
+</div>
+
+
 
 ## Getting Started
 
