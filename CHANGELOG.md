@@ -1,3 +1,11 @@
+[3.0.12](../../releases/tag/3.0.12)     2018-05-17 21:29:57
+-----------------------------------------------------------
+
+- [a6ec20b](../../commit/a6ec20b) 🐛  [bug]fix when scrolling 2 wheels at the same it is possible to set a date outside min/maxDate(https://github.com/lanjingling0510/react-mobile-datepicker/issues/27)
+- [3f6ef0d](../../commit/3f6ef0d) 🐛  [bug]fix readme.md error
+- [f4f3f01](../../commit/f4f3f01) 📚  [document] update readme.md
+
+
 [3.0.11](../../releases/tag/3.0.11)     2018-05-12 10:57:46
 -----------------------------------------------------------
 
