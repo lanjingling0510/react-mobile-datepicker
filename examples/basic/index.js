@@ -7,7 +7,7 @@ import DatePicker from '../../lib/index';
 (function main() {
     class App extends React.Component {
         state = {
-            time: new Date(2016, 8, 16, 8, 20, 57),
+            time: new Date(),
             isOpen: false,
             theme: 'default',
         }
@@ -75,6 +75,7 @@ import DatePicker from '../../lib/index';
                     <DatePicker
                         value={this.state.time}
                         dateSteps={[1, 1, 5]}
+                        max={new Date()}
                         dateFormat={['YYYY', ['MM', (month) => monthMap[month]], 'DD']}
                         theme={this.state.theme}
                         isOpen={this.state.isOpen}
