@@ -70,6 +70,19 @@
         cursor: pointer;
     }
 
+    .datepicker-caption {
+        display: flex;
+        padding: .5em .25em;
+    }
+
+    .datepicker-caption-item {
+        flex: 1;
+        margin: 0 .25em;
+        height: 40px;
+        line-height: 40px;
+        font-size: 1.2em;
+    }
+
     .datepicker-content {
         display: flex;
         padding: .5em .25em;
@@ -129,6 +142,9 @@
             border-top: 1px solid var(--default-theme);
             border-bottom: 1px solid var(--default-theme);
         }
+        .datepicker-caption-item {
+            color: var(--default-color);
+        }
         .datepicker-scroll {
             li {
                 color: var(--default-color);
@@ -153,6 +169,9 @@
         .datepicker-wheel {
             border-top: 1px solid var(--dark-theme);
             border-bottom: 1px solid var(--dark-theme);
+        }
+        .datepicker-caption-item {
+            color: var(--dark-color);
         }
         .datepicker-scroll {
             li {
@@ -185,6 +204,9 @@
         .datepicker-wheel {
             border-top: 1px solid var(--ios-theme);
             border-bottom: 1px solid var(--ios-theme);
+        }
+        .datepicker-caption-item {
+            color: var(--ios-color);
         }
         .datepicker-scroll {
             li {
@@ -219,6 +241,10 @@
         .datepicker-header + .datepicker-content {
           padding-top: 0;
         }
+
+        .datepicker-caption + .datepicker-content {
+          padding-top: 0;
+        }
     }
 
 
@@ -240,7 +266,9 @@
             border-top: 2px solid var(--android-theme);
             border-bottom: 2px solid var(--android-theme);
         }
-
+        .datepicker-caption-item {
+            color: var(--android-color);
+        }
         .datepicker-scroll {
             li {
                 font-size: 1.125em;
@@ -274,6 +302,9 @@
             &::after {
                 background-image: linear-gradient(#282828,rgba(40,40,40,0)52%,rgba(40,40,40,0)48%,#282828);
             }
+        }
+        .datepicker-caption-item {
+            color: var(--android-dark-color);
         }
         .datepicker-scroll {
             li {

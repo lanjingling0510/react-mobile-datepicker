@@ -15,8 +15,23 @@ const DEFAULT_PROPS = {
     value: new Date(2016, 8, 16),
     min: new Date(2015, 10, 1),
     max: new Date(2020, 10, 1),
-    dateFormat: ['YYYY', 'M', 'D'],
-    dateSteps: [1, 1, 1],
+    dateConfig: {
+        'year': {
+            format: 'YYYY',
+            caption: 'Year',
+            step: 1,
+        },
+        'month': {
+            format: 'M',
+            caption: 'Mon',
+            step: 1,
+        },
+        'date': {
+            format: 'D',
+            caption: 'Day',
+            step: 1,
+        },
+    },
     isOpen: true,
 }
 
@@ -287,13 +302,22 @@ describe('渲染正确的DatepicketItem子组件', () => {
     beforeEach(() => {
         props = {
             value: new Date(2016, 8, 16),
-            dateSteps: [1, 1, 1]
         };
         mountedDatepicker = undefined;
     });
 
     it('当dateFormat等于[YYYY, MM, DD]', () => {
-        props.dateFormat = ['YYYY', 'MM', 'DD'];
+        props.dateConfig = {
+            'year': {
+                format: 'YYYY',
+            },
+            'month': {
+                format: 'MM',
+            },
+            'date': {
+                format: 'DD',
+            },
+        };
         const datePickerItems = datePicker().find(DatePickerItem);
         expect(datePickerItems.length).to.equals(3);
         expect(datePickerItems.at(0).props().format).to.equals('YYYY');
@@ -302,7 +326,26 @@ describe('渲染正确的DatepicketItem子组件', () => {
     });
 
     it('当dateFormat等于[YYYY, MM, DD, hh, mm, ss]', () => {
-        props.dateFormat = ['YYYY', 'MM', 'DD', 'hh', 'mm', 'ss'];
+        props.dateConfig = {
+            'year': {
+                format: 'YYYY',
+            },
+            'month': {
+                format: 'MM',
+            },
+            'date': {
+                format: 'DD',
+            },
+            'hour': {
+                format: 'hh',
+            },
+            'minute': {
+                format: 'mm',
+            },
+            'second': {
+                format: 'ss',
+            },
+        };
         const datePickerItems = datePicker().find(DatePickerItem);
         expect(datePickerItems.length).to.equals(6);
         expect(datePickerItems.at(0).props().format).to.equals('YYYY');
@@ -314,7 +357,17 @@ describe('渲染正确的DatepicketItem子组件', () => {
     });
 
     it('当dateFormat等于[hh, mm, ss]', () => {
-        props.dateFormat = ['hh', 'mm', 'ss'];
+        props.dateConfig = {
+            'hour': {
+                format: 'hh',
+            },
+            'minute': {
+                format: 'mm',
+            },
+            'second': {
+                format: 'ss',
+            },
+        };
         const datePickerItems = datePicker().find(DatePickerItem);
         expect(datePickerItems.length).to.equals(3);
         expect(datePickerItems.at(0).props().format).to.equals('hh');
@@ -323,7 +376,7 @@ describe('渲染正确的DatepicketItem子组件', () => {
     });
 });
 
-describe('测试dateSteps属性', () => {
+describe('测试step', () => {
     let props;
     let mountedDatepicker;
     let yearPicker, monthPicker, dayPicker;
@@ -357,8 +410,20 @@ describe('测试dateSteps属性', () => {
 
 
     it ('当datesteps等于[5, 5, 5], dateFormart等于[hh, mm, ss], 当前时间为8:20:57，向上滑动秒，分钟应该为23', () => {
-        props.dateFormat = ['hh', 'mm', 'ss'];
-        props.dateSteps = [1, 1, 5];
+        props.dateConfig = {
+            'hour': {
+                format: 'hh',
+                step: 1,
+            },
+            'minute': {
+                format: 'mm',
+                step: 1,
+            },
+            'second': {
+                format: 'ss',
+                step: 5,
+            },
+        };
 
         const datePickerItems = datePicker().find(DatePickerItem);
         const second = dayPicker.find('.datepicker-viewport').instance();
@@ -385,8 +450,21 @@ describe('测试dateSteps属性', () => {
 
 
     it ('当datesteps等于[5, 5, 5], dateFormart等于[hh, mm, ss], 当前时间为8:20:57，向上滑动秒，最大时间是8:20:59, 分钟应该为22', () => {
-        props.dateFormat = ['hh', 'mm', 'ss'];
-        props.dateSteps = [1, 1, 5];
+        props.dateConfig = {
+            'hour': {
+                format: 'hh',
+                step: 1,
+            },
+            'minute': {
+                format: 'mm',
+                step: 1,
+            },
+            'second': {
+                format: 'ss',
+                step: 5,
+            },
+        };
+
         props.max = new Date(2016, 8, 16, 8, 22, 59);
 
         const datePickerItems = datePicker().find(DatePickerItem);
@@ -412,3 +490,55 @@ describe('测试dateSteps属性', () => {
         })
     });
 });
+
+
+describe('测试showCaption属性', () => {
+    let props;
+    let mountedDatepicker;
+
+    const datePicker = () => {
+        if (!mountedDatepicker) {
+            mountedDatepicker = mount(
+                <DatePicker {...props} />
+            );
+        }
+
+        return mountedDatepicker;
+    }
+
+    beforeEach(() => {
+        props = {
+            value: new Date(2016, 8, 16, 8, 22, 57),
+            isOpen: true,
+        };
+        mountedDatepicker = undefined;
+    });
+
+    it ('不显示说明', () => {
+        const wrapper = datePicker();
+        expect(wrapper.find('.datepicker-caption'))
+        expect(wrapper.find('.datepicker-caption')).to.have.lengthOf(0);
+    });
+    it ('显示说明', () => {
+        props.showCaption = true;
+        props.dateConfig = {
+            'month': {
+                format: 'M',
+                caption: 'Month',
+                step: 1,
+            },
+            'date': {
+                format: 'D',
+                caption: 'Day',
+                step: 1,
+            },
+            'hour': {
+                format: 'hh',
+                caption: 'Hour',
+                step: 1,
+            },
+        };
+        const wrapper = datePicker();
+        expect(wrapper.find('.datepicker-caption').text()).to.be.equal('MonthDayHour');
+    });
+})

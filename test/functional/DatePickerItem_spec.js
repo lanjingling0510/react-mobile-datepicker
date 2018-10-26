@@ -23,7 +23,7 @@ describe('DatePickerItem.js', () => {
         it('should call componentWillMount and initialize dates of state', () => {
             const spyFunction = sinon.spy(DatePickerItem.prototype, 'componentWillMount');
             const datePicker = mount(
-                <DatePickerItem {...DEFAULT_PROPS} format="D" />
+                <DatePickerItem {...DEFAULT_PROPS} format="D" type="Date" />
             );
             const dates = datePicker.state('dates');
             sinon.assert.calledOnce(spyFunction);
@@ -38,7 +38,7 @@ describe('DatePickerItem.js', () => {
         it('componentWillReceiveProps', () => {
             const spyFunction = sinon.spy(DatePickerItem.prototype, 'componentWillReceiveProps');
             const datePicker = mount(
-                <DatePickerItem {...DEFAULT_PROPS} format="D" />
+                <DatePickerItem {...DEFAULT_PROPS} format="D" type="Date" />
             );
             datePicker.setProps({ date: new Date(2010, 3, 10) });
             const dates = datePicker.state('dates');
@@ -54,7 +54,7 @@ describe('DatePickerItem.js', () => {
         it('shouldComponentUpdate', () => {
             const spyFunction = sinon.spy(DatePickerItem.prototype, 'shouldComponentUpdate');
             const datePicker = mount(
-                <DatePickerItem {...DEFAULT_PROPS} format="D" />
+                <DatePickerItem {...DEFAULT_PROPS} format="D" type="Date" />
             );
 
             datePicker.setProps({ value: new Date(2010, 3, 10) });
@@ -68,7 +68,7 @@ describe('DatePickerItem.js', () => {
         it('should call handleContent three times after touching', () => {
             const spyFunction = sinon.spy(DatePickerItem.prototype, 'handleContentTouch');
             const datePicker = mount(
-                <DatePickerItem {...DEFAULT_PROPS} format="D" />
+                <DatePickerItem {...DEFAULT_PROPS} format="D" type="Date" />
             );
 
             const touchstartEvent = {
@@ -96,7 +96,7 @@ describe('DatePickerItem.js', () => {
         it('should analyzing the right direction', () => {
             const spyFunction = sinon.spy(DatePickerItem.prototype, '_moveToNext');
             const datePicker = mount(
-                <DatePickerItem {...DEFAULT_PROPS} format="D" />
+                <DatePickerItem {...DEFAULT_PROPS} format="D" type="Date" />
             );
             const touchstartEvent = {
                 targetTouches: [{ pageY: 0 }],
@@ -113,7 +113,7 @@ describe('DatePickerItem.js', () => {
             expect(spyFunction.getCall(0).args[0]).to.equal(-1);
 
             const datePicker2 = mount(
-                <DatePickerItem {...DEFAULT_PROPS} format="D" />
+                <DatePickerItem {...DEFAULT_PROPS} format="D" type="Date" />
             );
             const touchstartEvent2 = {
                 targetTouches: [{ pageY: 0 }],
@@ -135,7 +135,7 @@ describe('DatePickerItem.js', () => {
         it('should update dates of state, When the sliding more than 20', () => {
             const spyFunction = sinon.spy(DatePickerItem.prototype, '_updateDates');
             const datePicker = mount(
-                <DatePickerItem {...DEFAULT_PROPS} format="D" />
+                <DatePickerItem {...DEFAULT_PROPS} format="D" type="Date" />
             );
             const touchstartEvent = {
                 targetTouches: [{ pageY: 0 }],
@@ -164,7 +164,7 @@ describe('DatePickerItem.js', () => {
 
             const spyFunction = sinon.spy(DatePickerItem.prototype, '_moveTo');
             const datePicker = mount(
-                <DatePickerItem {...props} format="D" />
+                <DatePickerItem {...props} format="D" type="Date" />
             );
 
             const touchstartEvent = {

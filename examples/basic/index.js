@@ -25,21 +25,6 @@ import DatePicker from '../../lib/index';
         }
 
         render() {
-            const monthMap = {
-                '01': 'Jan',
-                '02': 'Feb',
-                '03': 'Mar',
-                '04': 'Apr',
-                '05': 'May',
-                '06': 'Jun',
-                '07': 'Jul',
-                '08': 'Aug',
-                '09': 'Sep',
-                '10': 'Oct',
-                '11': 'Nov',
-                '12': 'Dec',
-            };
-
             return (
                 <div className="App">
                     <p className="select-time ">
@@ -74,11 +59,27 @@ import DatePicker from '../../lib/index';
                     </div>
                     <DatePicker
                         value={this.state.time}
-                        dateSteps={[1, 1, 5]}
                         max={new Date()}
-                        dateFormat={['YYYY', ['MM', (month) => monthMap[month]], 'DD']}
                         theme={this.state.theme}
                         isOpen={this.state.isOpen}
+                        showCaption
+                        dateConfig={{
+                            'year': {
+                                format: 'YYYY',
+                                caption: '年',
+                                step: 1,
+                            },
+                            'month': {
+                                format: 'M',
+                                caption: '月',
+                                step: 1,
+                            },
+                            'date': {
+                                format: 'D',
+                                caption: '日',
+                                step: 1,
+                            },
+                        }}
                         onSelect={this.handleSelect}
                         onCancel={this.handleToggle(false)} />
                 </div>
