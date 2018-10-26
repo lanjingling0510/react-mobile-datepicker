@@ -1,3 +1,10 @@
+[4.0.0](../../releases/tag/4.0.0)     2018-10-26 12:39:53
+---------------------------------------------------------
+
+- [88e8b68](../../commit/88e8b68) 📚  [document] edit readme document.
+- [daf0b98](../../commit/daf0b98) ✨  [feature] add feature of caption customized(https://github.com/lanjingling0510/react-mobile-datepicker/issues/31)
+
+
 [3.0.12](../../releases/tag/3.0.12)     2018-05-17 21:29:57
 -----------------------------------------------------------
 
