@@ -39,14 +39,69 @@ react-mobile-datepicker provides a component that can set year, month, day, hour
 
 ## Custom date unit
 
-set dateFormat for `['YYYY', 'MM', 'DD', 'hh', 'mm']` to configure year, month, day, hour, minute.
+set `dateConfig` to configure year, month, day, hour, minute.
+
+```javascript
+{
+    'year': {
+        format: 'YYYY',
+        caption: 'Year',
+        step: 1,
+    },
+    'month': {
+        format: 'MM',
+        caption: 'Mon',
+        step: 1,
+    },
+    'date': {
+        format: 'DD',
+        caption: 'Day',
+        step: 1,
+    },
+    'hour': {
+        format: 'hh',
+        caption: 'Hour',
+        step: 1,
+    },
+    'minute': {
+        format: 'mm',
+        caption: 'Min',
+        step: 1,
+    },
+    'second': {
+        format: 'hh',
+        caption: 'Sec',
+        step: 1,
+    },
+}
+```
 
 <div style="padding:30px">
 <img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/year-month-day-hour-minute.png" width="300" />
 </div>
 
 
-set dateFormat for `['hh', 'mm', 'ss']` to configure hour, minute and second.
+set `dateConfig` to configure hour, minute and second.
+
+```javascript
+{
+    'hour': {
+        format: 'hh',
+        caption: 'Hour',
+        step: 1,
+    },
+    'minute': {
+        format: 'mm',
+        caption: 'Min',
+        step: 1,
+    },
+    'second': {
+        format: 'hh',
+        caption: 'Sec',
+        step: 1,
+    },
+}
+```
 
 <div style="padding:30px">
 <img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/hour-minute-second.png" width="300" />
@@ -54,31 +109,80 @@ set dateFormat for `['hh', 'mm', 'ss']` to configure hour, minute and second.
 
 customize the content mapping shown in the month.
 
-```js
+```javascript
+
 const monthMap = {
-	'01': 'Jan',
-	'02': 'Feb',
-	'03': 'Mar',
-	'04': 'Apr',
-	'05': 'May',
-	'06': 'Jun',
-	'07': 'Jul',
-	'08': 'Aug',
-	'09': 'Sep',
+	'1': 'Jan',
+	'2': 'Feb',
+	'3': 'Mar',
+	'4': 'Apr',
+	'5': 'May',
+	'6': 'Jun',
+	'7': 'Jul',
+	'8': 'Aug',
+	'9': 'Sep',
 	'10': 'Oct',
 	'11': 'Nov',
 	'12': 'Dec',
 };
 
+const dateConfig = {
+	'year': {
+		format: 'YYYY',
+		caption: 'Year',
+		step: 1,
+	},
+	'month': {
+		format: value => monthMap[value.getMonth() + 1],
+		caption: 'Mon',
+		step: 1,
+	},
+	'date': {
+		format: 'DD',
+		caption: 'Day',
+		step: 1,
+	},
+};
+
 <DatePicker
-	dateFormat={['YYYY', ['MM', (month) => monthMap[month]], 'DD']}
+	dateConfig={dateConfig}
 />
 
 ```
-
+<div style="padding:30px">
 <img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/year-custom_month-day.png" width="300" />
 </div>
 
+set `showCaption` to display date captions, matches the dateConfig property's caption.
+
+```javascript
+const dateConfig = {
+    'hour': {
+        format: 'hh',
+        caption: 'Hour',
+        step: 1,
+    },
+    'minute': {
+        format: 'mm',
+        caption: 'Min',
+        step: 1,
+    },
+    'second': {
+        format: 'hh',
+        caption: 'Sec',
+        step: 1,
+    },
+}
+
+<DatePicker
+	showCaption={true}
+	dateConfig={dateConfig}
+/>
+```
+
+<div style="padding:30px">
+<img src="https://raw.githubusercontent.com/lanjingling0510/react-mobile-datepicker/master/.github/caption.png" width="300" />
+</div>
 
 
 ## Getting Started
@@ -93,7 +197,7 @@ Using [npm](https://www.npmjs.com/):
 The following guide assumes you have some sort of ES2015 build set up using babel and/or webpack/browserify/gulp/grunt/etc.
 
 
-```js
+```javascript
 // Using an ES6 transpiler like Babel
 import  React from 'react';
 import ReactDOM from 'react-dom';
@@ -104,7 +208,7 @@ import DatePicker from 'react-mobile-datepicker';
 ### Usage Example
 
 
-```js
+```javascript
 class App extends React.Component {
 	state = {
 		time: new Date(),
@@ -154,9 +258,11 @@ ReactDOM.render(<App />, document.getElementById('react-box'));
 | isPopup      | Boolean | true | whether  as popup add a overlay |
 | isOpen      | Boolean | false | whether to open datepicker |
 | theme      | String      | default  | theme of datepicker, include 'default', 'dark', 'ios', 'android', 'android-dark' |
-| dateFormat | Array     | ['YYYY', 'M', 'D'] | according to year, month, day, hour, minute, second format specified display text. E.g ['YYYY年', 'MM月', 'DD日']|
-| dateSteps | Array | [1, 1, 1] | set step for each time unit |
-|showFormat | String | 'YYYY/MM/DD' | customize the format of the display title |
+| ~~dateFormat~~(deprecated, use `dateConfig` instead) | Array     | ['YYYY', 'M', 'D'] | according to year, month, day, hour, minute, second format specified display text. E.g ['YYYY年', 'MM月', 'DD日']|
+| ~~dateSteps~~(deprecated), use `dateConfig` instead | Array | [1, 1, 1] | set step for each time unit |
+| dateConfig | Object | [See `DateConfig` format for details](#dateconfig) | configure date unit information |
+|~~showFormat~~(deprecated, use `headerFormat` instead) | String | 'YYYY/MM/DD' | customize the format of the display title |
+|headerFormat | String | 'YYYY/MM/DD' | customize the format of the display title |
 | value | Date | new Date() | date value |
 | min  | Date | new Date(1970, 0, 1) | minimum date |
 | max | Date | new Date(2050, 0, 1) | maximum date |
@@ -166,6 +272,52 @@ ReactDOM.render(<App />, document.getElementById('react-box'));
 | cancelText | String | 取消 | customize the cancel button text |
 | onSelect | Function | () => {} | the callback function after click button of done, Date object as a parameter |
 | onCancel | Function | () => {} | the callback function after click button of cancel |
+
+
+## DateConfig
+
+all default date configuration information, as follows
+
+- format: date unit display format
+- caption: date unit caption
+- step: date unit change interval
+
+```javascript
+{
+    'year': {
+        format: 'YYYY',
+        caption: 'Year',
+        step: 1,
+    },
+    'month': {
+        format: 'M',
+        caption: 'Mon',
+        step: 1,
+    },
+    'date': {
+        format: 'D',
+        caption: 'Day',
+        step: 1,
+    },
+    'hour': {
+        format: 'hh',
+        caption: 'Hour',
+        step: 1,
+    },
+    'minute': {
+        format: 'mm',
+        caption: 'Min',
+        step: 1,
+    },
+    'second': {
+        format: 'hh',
+        caption: 'Sec',
+        step: 1,
+    },
+}
+
+```
+
 
 ## Changelog
 * [Changelog](CHANGELOG.md)
