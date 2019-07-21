@@ -15,6 +15,7 @@ const DEFAULT_PROPS = {
     value: new Date(2016, 8, 16),
     min: new Date(2015, 10, 1),
     max: new Date(2020, 10, 1),
+    onChange: () => {},
     dateConfig: {
         'year': {
             format: 'YYYY',
@@ -401,6 +402,7 @@ describe('测试step', () => {
             min: new Date(2015, 10, 1),
             max: new Date(2020, 10, 1),
             isOpen: true,
+            onChange: () => {},
         };
         mountedDatepicker = undefined;
         yearPicker = null;
