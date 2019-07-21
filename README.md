@@ -267,11 +267,13 @@ ReactDOM.render(<App />, document.getElementById('react-box'));
 | min  | Date | new Date(1970, 0, 1) | minimum date |
 | max | Date | new Date(2050, 0, 1) | maximum date |
 | showHeader | Boolean | true | whether to show the header |
+| showFooter | Boolean | true | whether to show the fotter |
 | customHeader | ReactElement | undefined | customize the header, if you set this property, it will replace `showFormat`|
 | confirmText  | String | 完成 | customize the selection time button text |
 | cancelText | String | 取消 | customize the cancel button text |
 | onSelect | Function | () => {} | the callback function after click button of done, Date object as a parameter |
 | onCancel | Function | () => {} | the callback function after click button of cancel |
+| onChange | Function | () => {} | the callback function after date be changed |
 
 
 ## DateConfig
