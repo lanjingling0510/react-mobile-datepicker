@@ -9,7 +9,7 @@ import './index.css';
 
 const props = {
     value: new Date(),
-    isPopup: false,
+  
     theme: 'android'
 };
 

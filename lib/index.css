@@ -1,5 +1,5 @@
 :root {
-    --default-bg: #f7f7f7;
+    --default-bg: #fff;
     --default-color: color(var(--default-bg) contrast(50%));
     --default-disabled-color: color(var(--default-color) blend(var(--default-bg) 70%));
     --default-theme: #4eccc4;
