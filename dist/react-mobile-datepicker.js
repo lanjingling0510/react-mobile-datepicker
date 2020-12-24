@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('react-dom')) :
         typeof define === 'function' && define.amd ? define(['react', 'react-dom'], factory) :
-            (global.reactMobileDatePicker = factory(global.React,global.ReactDOM));
+            (global.$npm_package_amdName = factory(global.React,global.ReactDOM));
 }(this, (function (React,ReactDOM) { 'use strict';
 
     function __$styleInject(css, ref) {
@@ -85,7 +85,6 @@
      */
     function nextYear(now) {
         var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
         throwIfInvalidDate(now);
         var date = new Date(now.getFullYear() + index, now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds());
         return date;
@@ -93,8 +92,12 @@
 
     function nextMonth(now) {
         var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        var relative = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
         throwIfInvalidDate(now);
+        if (!relative) {
+            return new Date(now.getFullYear(), (now.getMonth() + 12 + index) % 12, now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds());
+        }
         var year = now.getFullYear();
         var month = now.getMonth() + index;
         var dayOfMonth = Math.min(now.getDate(), daysInMonth(year, month));
@@ -104,32 +107,53 @@
 
     function nextDate(now) {
         var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        var relative = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
         throwIfInvalidDate(now);
+        if (!relative) {
+            var year = now.getFullYear();
+            var month = now.getMonth();
+            var maxDayInMonth = daysInMonth(year, month);
+            var day = (now.getDate() - 1 + maxDayInMonth + index) % maxDayInMonth + 1;
+            return new Date(now.getFullYear(), now.getMonth(), day, now.getHours(), now.getMinutes(), now.getSeconds());
+        }
         var date = new Date(now.getTime() + index * 24 * 60 * 60 * 1000);
         return date;
     }
 
     function nextHour(now) {
         var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        var relative = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
         throwIfInvalidDate(now);
+        if (!relative) {
+            return new Date(now.getFullYear(), now.getMonth(), now.getDate(), (now.getHours() + 24 + index) % 24, now.getMinutes(), now.getSeconds());
+        }
         var date = new Date(now.getTime() + index * 60 * 60 * 1000);
         return date;
     }
 
     function nextMinute(now) {
         var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        var relative = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
         throwIfInvalidDate(now);
+        if (!relative) {
+            return new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), (now.getMinutes() + 60 + index) % 60, now.getSeconds());
+        }
         var date = new Date(now.getTime() + index * 60 * 1000);
         return date;
     }
 
     function nextSecond(now) {
         var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        var relative = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
+        console.log(relative);
         throwIfInvalidDate(now);
+        if (!relative) {
+            return new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), (now.getSeconds() + 60 + index) % 60);
+        }
         var date = new Date(now.getTime() + index * 1000);
         return date;
     }
@@ -566,7 +590,7 @@
 
                 var typeName = this.props.type;
                 var dates = Array.apply(undefined, toConsumableArray(Array(DATE_LENGTH))).map(function (value, index) {
-                    return TimeUtil['next' + typeName](date, (index - MIDDLE_INDEX) * _this2.props.step);
+                    return TimeUtil['next' + typeName](date, (index - MIDDLE_INDEX) * _this2.props.step, _this2.props.relative);
                 });
                 this.setState({ dates: dates });
             }
@@ -579,13 +603,13 @@
                 if (direction === 1) {
                     this.currentIndex++;
                     this.setState({
-                        dates: [].concat(toConsumableArray(dates.slice(1)), [TimeUtil['next' + typeName](dates[dates.length - 1], this.props.step)]),
+                        dates: [].concat(toConsumableArray(dates.slice(1)), [TimeUtil['next' + typeName](dates[dates.length - 1], this.props.step, this.props.relative)]),
                         marginTop: (this.currentIndex - MIDDLE_INDEX) * DATE_HEIGHT
                     });
                 } else {
                     this.currentIndex--;
                     this.setState({
-                        dates: [TimeUtil['next' + typeName](dates[0], -this.props.step)].concat(toConsumableArray(dates.slice(0, dates.length - 1))),
+                        dates: [TimeUtil['next' + typeName](dates[0], -this.props.step, this.props.relative)].concat(toConsumableArray(dates.slice(0, dates.length - 1))),
                         marginTop: (this.currentIndex - MIDDLE_INDEX) * DATE_HEIGHT
                     });
                 }
@@ -622,10 +646,8 @@
                     max = _props.max,
                     min = _props.min;
 
-                if (direction === -1 && date.getTime() < min.getTime() && this.moveDateCount) {
-                    this._updateDates(1);
-                } else if (direction === 1 && date.getTime() > max.getTime() && this.moveDateCount) {
-                    this._updateDates(-1);
+                if ((date.getTime() < min.getTime() || date.getTime() > max.getTime()) && this.moveDateCount) {
+                    this._updateDates(-direction);
                 }
 
                 this._moveTo(this.currentIndex);
@@ -686,7 +708,7 @@
 
                 // 检测是否更新日期列表
                 if (this._checkIsUpdateDates(direction, translateY)) {
-                    this.moveDateCount = direction > 0 ? this.moveDateCount + 1 : this.moveDateCount - 1;
+                    this.moveDateCount = direction >= 0 ? this.moveDateCount + 1 : this.moveDateCount - 1;
                     this._updateDates(direction);
                 }
 
@@ -1079,7 +1101,8 @@
                     showHeader = _props2.showHeader,
                     showFooter = _props2.showFooter,
                     customHeader = _props2.customHeader,
-                    showCaption = _props2.showCaption;
+                    showCaption = _props2.showCaption,
+                    relative = _props2.relative;
 
                 var value = this.state.value;
                 var themeClassName = ['default', 'dark', 'ios', 'android', 'android-dark'].indexOf(theme) === -1 ? 'default' : theme;
@@ -1118,6 +1141,7 @@
                                 step: item.step,
                                 type: item.type,
                                 format: item.format,
+                                relative: relative,
                                 onSelect: _this3.handleDateSelect });
                         })
                     ),
@@ -1235,4 +1259,4 @@
     return ModalDatePicker;
 
 })));
-//# sourceMappingURL=react-mobile-datepicker.js.map
+//# sourceMappingURL=$npm_package_main.map

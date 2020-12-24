@@ -63,20 +63,31 @@ import DatePicker from '../../lib/index';
                         theme={this.state.theme}
                         isOpen={this.state.isOpen}
                         showCaption
+                        relative={false}
                         dateConfig={{
                             'year': {
                                 format: 'YYYY',
-                                caption: '年',
+                                caption: 'year',
                                 step: 1,
                             },
                             'month': {
                                 format: 'M',
-                                caption: '月',
+                                caption: 'month',
                                 step: 1,
                             },
                             'date': {
                                 format: 'D',
-                                caption: '日',
+                                caption: 'date',
+                                step: 1,
+                            },
+                            'hour': {
+                                format: 'h',
+                                caption: 'hour',
+                                step: 1,
+                            },
+                            'minute': {
+                                format: 'm',
+                                caption: 'minute',
                                 step: 1,
                             },
                         }}
