@@ -69,7 +69,7 @@ set `dateConfig` to configure year, month, day, hour, minute.
         step: 1,
     },
     'second': {
-        format: 'hh',
+        format: 'ss',
         caption: 'Sec',
         step: 1,
     },
@@ -168,7 +168,7 @@ const dateConfig = {
         step: 1,
     },
     'second': {
-        format: 'hh',
+        format: 'ss',
         caption: 'Sec',
         step: 1,
     },
@@ -312,7 +312,7 @@ all default date configuration information, as follows
         step: 1,
     },
     'second': {
-        format: 'hh',
+        format: 'ss',
         caption: 'Sec',
         step: 1,
     },
