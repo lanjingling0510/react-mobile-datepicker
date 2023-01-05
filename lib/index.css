@@ -38,10 +38,10 @@
 }
 
 .datepicker {
-    position: absolute;
+    position: relative;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: 300px;
     z-index: 1;
     font-size: 16px;
     text-align: center;
