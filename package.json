@@ -1,6 +1,6 @@
 {
   "name": "react-mobile-datepicker",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "一个移动端时间选择器react组件",
   "main": "./dist/react-mobile-datepicker.js",
   "amdName": "reactMobileDatePicker",
@@ -29,7 +29,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "author": "rainie",
+  "author": "rainie (Maia colaboration)",
   "devDependencies": {
     "@storybook/addon-info": "^3.2.12",
     "@storybook/react": "^3.2.12",
