@@ -1,9 +1,9 @@
 {
-  "name": "react-mobile-datepicker",
+  "name": "react-web-datepicker",
   "version": "4.0.3",
   "description": "一个移动端时间选择器react组件",
   "main": "./dist/react-mobile-datepicker.js",
-  "amdName": "reactMobileDatePicker",
+  "amdName": "reactMobileDatePicker-wheel",
   "minified:main": "dist/react-mobile-datepicker.min.js",
   "repository": "maiavierasedicii/react-mobile-datepicker",
   "homepage": "https://github.com/lanjingling0510/react-mobile-datepicker#readme",
