@@ -2,4 +2,3 @@ node_modules/
 examples/__build__/
 .nyc_output/
 coverage/
-dist
