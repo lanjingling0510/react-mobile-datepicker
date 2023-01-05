@@ -5,7 +5,7 @@
   "main": "./dist/react-mobile-datepicker.js",
   "amdName": "reactMobileDatePicker",
   "minified:main": "dist/react-mobile-datepicker.min.js",
-  "repository": "lanjingling0510/react-mobile-datepicker",
+  "repository": "maiavierasedicii/react-mobile-datepicker",
   "homepage": "https://github.com/lanjingling0510/react-mobile-datepicker#readme",
   "keywords": [
     "react-component",
@@ -14,6 +14,7 @@
     "datepicker",
     "react",
     "mobile",
+    "wheel-event",
     "calendar"
   ],
   "scripts": {
