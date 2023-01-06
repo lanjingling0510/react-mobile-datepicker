@@ -3,12 +3,13 @@ examples/
 .nyc_output/
 coverage/
 stories/
-sotrybook-static/
+storybook-static/
 lib/*.js
 .github
-.sotrybook/
+.storybook/
 .babelrc
 .eslintrc
+.eslintignore
 .gitignore
 .travis.yml
 postcss.config.js
