@@ -83,6 +83,35 @@
         font-size: 1.2em;
     }
 
+    .datepicker-scroll-btn {                
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 .25em;
+        cursor: pointer;
+    }
+
+    .datepicker-scroll-btn-icon {
+        border-radius: 100%;
+        display: flex;
+        font-size: 12px;
+        color: darkgray;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 1s;
+        height: 20px;
+        width: 20px;
+    }
+
+    .datepicker-scroll-btn-icon:active {
+        background: rgba(0,0,0,0.4);
+    }
+
+    .datepicker-scroll-btn-icon:hover {
+        color: rgb(17, 17, 17);
+    }
+
     .datepicker-content {
         display: flex;
         padding: .5em .25em;

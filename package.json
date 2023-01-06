@@ -1,6 +1,6 @@
 {
   "name": "react-web-datepicker",
-  "version": "4.0.11",
+  "version": "4.0.12",
   "description": "一个移动端时间选择器react组件",
   "main": "./dist/react-mobile-datepicker.js",
   "amdName": "reactMobileDatePicker-wheel",
@@ -15,6 +15,8 @@
     "react",
     "mobile",
     "wheel-event",
+    "3-wheels",
+    "scroll-buttons",
     "calendar"
   ],
   "scripts": {
@@ -30,7 +32,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "author": "rainie (Maia colaboration)",
+  "author": "rainie (Maia collaboration)",
   "devDependencies": {
     "@storybook/addon-info": "^3.2.12",
     "@storybook/react": "^3.2.12",
